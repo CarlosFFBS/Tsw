@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NegocioCliente.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.clientes</a> &gt; <span class="el_source">NegocioCliente.java</span></div><h1>NegocioCliente.java</h1><pre class="source lang-java linenums">package sla.clientes;
+
+import java.util.ArrayList;
+
+<span class="nc" id="L5">public class NegocioCliente implements InterfaceClienteSigns {</span>
+
+    @Override
+    public void cadastrarClientePF(ClientePessoaFisica clientePF) throws Exception {
+<span class="nc bnc" id="L9" title="All 2 branches missed.">        if (clientePF == null) {</span>
+<span class="nc" id="L10">            throw new Exception(&quot;O objeto não foi instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L12" title="All 4 branches missed.">        if (clientePF.getCli_Cpf() == null || clientePF.getCli_Cpf().trim().isEmpty()) {</span>
+<span class="nc" id="L13">            throw new Exception(&quot;Informe o CPF&quot;);</span>
+        }
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (clientePF.getCli_Cpf().length() != 14) {</span>
+<span class="nc" id="L16">            throw new Exception(&quot;Erro ao cadastrar o CPF. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L19" title="All 4 branches missed.">        if (clientePF.getNome() == null || clientePF.getNome().trim().isEmpty()) {</span>
+<span class="nc" id="L20">            throw new Exception(&quot;Informe o nome do cliente&quot;);</span>
+        }
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if (clientePF.getNome().length() &gt; 100) {</span>
+<span class="nc" id="L23">            throw new Exception(&quot;Limite máximo de 100 caracteres para o nome do cliente.&quot;);</span>
+        }
+<span class="nc bnc" id="L25" title="All 6 branches missed.">        if (clientePF.getTelefone() == null || clientePF.getTelefone().trim().isEmpty() || clientePF.getTelefone().charAt(1) == ' ') {</span>
+<span class="nc" id="L26">            throw new Exception(&quot;Informe o telefone&quot;);</span>
+        }
+
+<span class="nc bnc" id="L29" title="All 4 branches missed.">        if (clientePF.getCep() == null || clientePF.getCep().charAt(0) == '.') {</span>
+<span class="nc" id="L30">            throw new Exception(&quot;Informe o cep&quot;);</span>
+
+        }
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (clientePF.getCep().length() != 10) {</span>
+<span class="nc" id="L34">            throw new Exception(&quot;Erro ao cadastrar cep. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L37" title="All 4 branches missed.">        if (clientePF.getLogradouro() == null || clientePF.getLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L38">            throw new Exception(&quot;Informe o endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (clientePF.getLogradouro().length() &gt; 60) {</span>
+<span class="nc" id="L41">            throw new Exception(&quot;Limite máximo de 60 caracteres para o endereço do cliente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L44" title="All 4 branches missed.">        if (clientePF.getNumeroLogradouro() == null || clientePF.getNumeroLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L45">            throw new Exception(&quot;Informe o número do endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (clientePF.getNumeroLogradouro().length() &gt; 20) {</span>
+<span class="nc" id="L48">            throw new Exception(&quot;Limite máximo de 20 caracteres para número do endereço do cliente.&quot;);</span>
+        }
+<span class="nc bnc" id="L50" title="All 4 branches missed.">        if (clientePF.getComplemento() != null &amp;&amp; clientePF.getComplemento().length() &gt; 20) {</span>
+<span class="nc" id="L51">            throw new Exception(&quot;Limite máximo de 20 caracteres para o complemento.&quot;);</span>
+        }
+<span class="nc bnc" id="L53" title="All 4 branches missed.">        if (clientePF.getBairro() == null || clientePF.getBairro().trim().isEmpty()) {</span>
+<span class="nc" id="L54">            throw new Exception(&quot;Informe o bairro&quot;);</span>
+        }
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (clientePF.getBairro().length() &gt; 20) {</span>
+<span class="nc" id="L57">            throw new Exception(&quot;Limite máximo de 20 caracteres para o bairro.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L60" title="All 4 branches missed.">        if (clientePF.getCidade() == null || clientePF.getCidade().trim().isEmpty()) {</span>
+<span class="nc" id="L61">            throw new Exception(&quot;Informe a cidade&quot;);</span>
+        }
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (clientePF.getCidade().length() &gt; 20) {</span>
+<span class="nc" id="L64">            throw new Exception(&quot;Limite máximo de 20 caracteres para a cidade.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L67" title="All 4 branches missed.">        if (clientePF.getEstado() == null || clientePF.getEstado().trim().isEmpty()) {</span>
+<span class="nc" id="L68">            throw new Exception(&quot;Informe o estado&quot;);</span>
+        }
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (clientePF.getEstado().length() != 2) {</span>
+<span class="nc" id="L71">            throw new Exception(&quot;Limite máximo de 2 caracteres para o estado.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L74" title="All 4 branches missed.">        if (clientePF.getEmail() == null || clientePF.getEmail().trim().isEmpty()) {</span>
+<span class="nc" id="L75">            throw new Exception(&quot;Informe o email&quot;);</span>
+        }
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (clientePF.getEmail().length() &gt; 50) {</span>
+<span class="nc" id="L78">            throw new Exception(&quot;Limite máximo de 50 caracteres para o email.&quot;);</span>
+        }
+<span class="nc bnc" id="L80" title="All 4 branches missed.">        if (clientePF.getSexo() == null || clientePF.getSexo().trim().isEmpty()) {</span>
+<span class="nc" id="L81">            throw new Exception(&quot;Informe o sexo&quot;);</span>
+        }
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (clientePF.getSexo().length() != 1) {</span>
+<span class="nc" id="L84">            throw new Exception(&quot;Limite de 1 caractere para o sexo.&quot;);</span>
+        }
+
+<span class="nc" id="L87">        boolean teste = verificaDuplicidadeClientePF(clientePF);</span>
+
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (teste) {</span>
+<span class="nc" id="L90">            throw new Exception(&quot;Já existe um cliente para os dados informados&quot;);</span>
+        }
+<span class="nc" id="L92">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L93">        a.cadastrarClientePF(clientePF);</span>
+
+<span class="nc" id="L95">    }</span>
+
+    @Override
+    public void cadastrarClientePJ(ClientePessoaJuridica clientePJ) throws Exception {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (clientePJ == null) {</span>
+<span class="nc" id="L100">            throw new Exception(&quot;O objeto não foi instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L102" title="All 4 branches missed.">        if (clientePJ.getCli_Cnpj() == null || clientePJ.getCli_Cnpj().trim().isEmpty()) {</span>
+<span class="nc" id="L103">            throw new Exception(&quot;Informe o CNPJ&quot;);</span>
+        }
+
+<span class="nc bnc" id="L106" title="All 4 branches missed.">        if (clientePJ.getRazaoSocial() == null || clientePJ.getRazaoSocial().trim().isEmpty()) {</span>
+<span class="nc" id="L107">            throw new Exception(&quot;Informe a razão social.&quot;);</span>
+        }
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (clientePJ.getRazaoSocial().length() &gt; 60) {</span>
+<span class="nc" id="L110">            throw new Exception(&quot;Limite máximo de 60 caracteres para a razão social.&quot;);</span>
+        }
+<span class="nc bnc" id="L112" title="All 6 branches missed.">        if (clientePJ.getTelefone() == null || clientePJ.getTelefone().trim().isEmpty() || clientePJ.getTelefone().charAt(1) == ' ') {</span>
+<span class="nc" id="L113">            throw new Exception(&quot;Informe o telefone&quot;);</span>
+        }
+
+<span class="nc bnc" id="L116" title="All 4 branches missed.">        if (clientePJ.getCep() == null || clientePJ.getCep().charAt(0) == '.') {</span>
+<span class="nc" id="L117">            throw new Exception(&quot;Informe o cep&quot;);</span>
+
+        }
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (clientePJ.getCep().length() != 10) {</span>
+<span class="nc" id="L121">            throw new Exception(&quot;Erro ao cadastrar cep. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L124" title="All 4 branches missed.">        if (clientePJ.getLogradouro() == null || clientePJ.getLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L125">            throw new Exception(&quot;Informe o endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (clientePJ.getLogradouro().length() &gt; 60) {</span>
+<span class="nc" id="L128">            throw new Exception(&quot;Limite máximo de 60 caracteres para o endereço do cliente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L131" title="All 4 branches missed.">        if (clientePJ.getNumeroLogradouro() == null || clientePJ.getNumeroLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L132">            throw new Exception(&quot;Informe o número do endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (clientePJ.getNumeroLogradouro().length() &gt; 20) {</span>
+<span class="nc" id="L135">            throw new Exception(&quot;Limite máximo de 20 caracteres para número do endereço do cliente.&quot;);</span>
+        }
+<span class="nc bnc" id="L137" title="All 4 branches missed.">        if (clientePJ.getComplemento() != null &amp;&amp; clientePJ.getComplemento().length() &gt; 20) {</span>
+<span class="nc" id="L138">            throw new Exception(&quot;Limite máximo de 20 caracteres para o complemento.&quot;);</span>
+        }
+<span class="nc bnc" id="L140" title="All 4 branches missed.">        if (clientePJ.getBairro() == null || clientePJ.getBairro().trim().isEmpty()) {</span>
+<span class="nc" id="L141">            throw new Exception(&quot;Informe o bairro&quot;);</span>
+        }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (clientePJ.getBairro().length() &gt; 20) {</span>
+<span class="nc" id="L144">            throw new Exception(&quot;Limite máximo de 20 caracteres para o bairro.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L147" title="All 4 branches missed.">        if (clientePJ.getCidade() == null || clientePJ.getCidade().trim().isEmpty()) {</span>
+<span class="nc" id="L148">            throw new Exception(&quot;Informe a cidade&quot;);</span>
+        }
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (clientePJ.getCidade().length() &gt; 20) {</span>
+<span class="nc" id="L151">            throw new Exception(&quot;Limite máximo de 20 caracteres para a cidade.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L154" title="All 4 branches missed.">        if (clientePJ.getEstado() == null || clientePJ.getEstado().trim().isEmpty()) {</span>
+<span class="nc" id="L155">            throw new Exception(&quot;Informe o estado&quot;);</span>
+        }
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if (clientePJ.getEstado().length() != 2) {</span>
+<span class="nc" id="L158">            throw new Exception(&quot;Erro ao cadastrar o estado.Verifique a quantidade de digitos e tente novamente. Limite de 2 caracteres&quot;</span>
+                    + &quot; para a o estado Ex: SP . &quot;);
+        }
+
+<span class="nc bnc" id="L162" title="All 4 branches missed.">        if (clientePJ.getEmail() == null || clientePJ.getEmail().trim().isEmpty()) {</span>
+<span class="nc" id="L163">            throw new Exception(&quot;Informe o email&quot;);</span>
+        }
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (clientePJ.getEmail().length() &gt; 50) {</span>
+<span class="nc" id="L166">            throw new Exception(&quot;Limite máximo de 50 caracteres para o email.&quot;);</span>
+        }
+
+<span class="nc" id="L169">        boolean teste = verificaDuplicidadeClientePJ(clientePJ);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (teste) {</span>
+<span class="nc" id="L171">            throw new Exception(&quot;Já existe um cliente para os dados informados&quot;);</span>
+        }
+<span class="nc" id="L173">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L174">        a.cadastrarClientePJ(clientePJ);</span>
+<span class="nc" id="L175">    }</span>
+
+    @Override
+    public int consultaCodClientePF(ClientePessoaFisica clientePF) throws Exception {
+<span class="nc" id="L179">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L180">        int consulta = a.consultaCodClientePF(clientePF);</span>
+<span class="nc" id="L181">        return consulta;</span>
+    }
+
+    @Override
+    public int consultaCodClientePJ(ClientePessoaJuridica clientePJ) throws Exception {
+<span class="nc" id="L186">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L187">        int consulta = a.consultaCodClientePJ(clientePJ);</span>
+<span class="nc" id="L188">        return consulta;</span>
+    }
+
+    @Override
+    public ArrayList&lt;ClientePessoaFisica&gt; consultarClientePF(ClientePessoaFisica clientePF) throws Exception {
+<span class="nc bnc" id="L193" title="All 2 branches missed.">        if (clientePF == null) {</span>
+<span class="nc" id="L194">            throw new Exception(&quot;O objeto deve ser instanciado.&quot;);</span>
+        }
+<span class="nc" id="L196">        boolean teste1 = false;</span>
+<span class="nc bnc" id="L197" title="All 4 branches missed.">        if (clientePF.getCli_Codigo() == null || clientePF.getCli_Codigo() &lt;= 0) {</span>
+<span class="nc" id="L198">            clientePF.setCli_Codigo(0);</span>
+<span class="nc" id="L199">            teste1 = true;</span>
+        }
+<span class="nc" id="L201">        boolean teste2 = false;</span>
+<span class="nc bnc" id="L202" title="All 4 branches missed.">        if (clientePF.getCli_Cpf() == null || clientePF.getCli_Cpf().equals(&quot;.   .   -&quot;)) {</span>
+<span class="nc" id="L203">            clientePF.setCli_Cpf(&quot; &quot;);</span>
+<span class="nc" id="L204">            teste2 = true;</span>
+        }
+
+<span class="nc" id="L207">        boolean teste3 = false;</span>
+<span class="nc bnc" id="L208" title="All 6 branches missed.">        if (clientePF.getNome() == null || clientePF.getNome().trim().isEmpty() || clientePF.getNome().length() &gt; 50) {</span>
+<span class="nc" id="L209">            clientePF.setNome(&quot; &quot;);</span>
+<span class="nc" id="L210">            teste3 = true;</span>
+        }
+<span class="nc bnc" id="L212" title="All 6 branches missed.">        if (teste1 &amp;&amp; teste2 &amp;&amp; teste3) {</span>
+<span class="nc" id="L213">            throw new Exception(&quot; Cliente não localizado para os dados informados&quot;);</span>
+        }
+
+<span class="nc" id="L216">        ArrayList&lt;ClientePessoaFisica&gt; consulta = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L217">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L218">        consulta = a.consultarClientePF(clientePF);</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        if (consulta.isEmpty()) {</span>
+<span class="nc" id="L220">            throw new Exception(&quot;Cliente não localizado&quot;);</span>
+        }
+<span class="nc" id="L222">        return consulta;</span>
+
+    }
+
+    @Override
+    public ArrayList&lt;ClientePessoaJuridica&gt; consultarClientePJ(ClientePessoaJuridica clientePJ) throws Exception {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (clientePJ == null) {</span>
+<span class="nc" id="L229">            throw new Exception(&quot;O objeto deve ser instanciado.&quot;);</span>
+        }
+<span class="nc bnc" id="L231" title="All 4 branches missed.">        if (clientePJ.getCli_Codigo() == null || clientePJ.getCli_Codigo() &lt;= 0) {</span>
+<span class="nc" id="L232">            clientePJ.setCli_Codigo(0);</span>
+        }
+
+<span class="nc bnc" id="L235" title="All 4 branches missed.">        if (clientePJ.getCli_Cnpj() == null || clientePJ.getCli_Cnpj().equals(&quot;  .   .   /    -  &quot;)) {</span>
+<span class="nc" id="L236">            throw new Exception(&quot;Informe o CNPJ.&quot;);</span>
+        }
+
+<span class="nc" id="L239">        ArrayList&lt;ClientePessoaJuridica&gt; consulta = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L240">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L241">        consulta = a.consultarClientePJ(clientePJ);</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">        if (consulta.isEmpty()) {</span>
+<span class="nc" id="L243">            throw new Exception(&quot;Cliente não localizado&quot;);</span>
+        }
+<span class="nc" id="L245">        return consulta;</span>
+    }
+
+    @Override
+    public void removerClientePFCod(ClientePessoaFisica cliente) throws Exception {
+<span class="nc bnc" id="L250" title="All 2 branches missed.">        if (cliente == null) {</span>
+<span class="nc" id="L251">            throw new Exception(&quot; O objeto deve ser instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if (cliente.getCli_Codigo() &lt;= 0) {</span>
+<span class="nc" id="L254">            throw new Exception(&quot; Não existe um cliente para os dados informados.&quot;);</span>
+        }
+<span class="nc" id="L256">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L257">        a.removerClientePFCod(cliente);</span>
+
+<span class="nc" id="L259">    }</span>
+
+    @Override
+    public void removerClientePJCod(ClientePessoaJuridica cliente) throws Exception {
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        if (cliente == null) {</span>
+<span class="nc" id="L264">            throw new Exception(&quot; O objeto deve ser instanciado&quot;);</span>
+        }
+
+<span class="nc bnc" id="L267" title="All 2 branches missed.">        if (cliente.getCli_Codigo() &lt;= 0) {</span>
+<span class="nc" id="L268">            throw new Exception(&quot; Não existe um cliente para os dados informados.&quot;);</span>
+        }
+<span class="nc" id="L270">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L271">        a.removerClientePJCod(cliente);</span>
+<span class="nc" id="L272">    }</span>
+
+    @Override
+    public void alterarClientePF(ClientePessoaFisica clientePF) throws Exception {
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        if (clientePF == null) {</span>
+<span class="nc" id="L277">            throw new Exception(&quot;O objeto não foi instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L279" title="All 4 branches missed.">        if (clientePF.getCli_Cpf() == null || clientePF.getCli_Cpf().trim().isEmpty()) {</span>
+<span class="nc" id="L280">            throw new Exception(&quot;Informe o CPF&quot;);</span>
+        }
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        if (clientePF.getCli_Cpf().length() != 14) {</span>
+<span class="nc" id="L283">            throw new Exception(&quot;Erro ao cadastrar o CPF. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L286" title="All 4 branches missed.">        if (clientePF.getNome() == null || clientePF.getNome().trim().isEmpty()) {</span>
+<span class="nc" id="L287">            throw new Exception(&quot;Informe o nome do cliente&quot;);</span>
+        }
+<span class="nc bnc" id="L289" title="All 2 branches missed.">        if (clientePF.getNome().length() &gt; 100) {</span>
+<span class="nc" id="L290">            throw new Exception(&quot;Limite máximo de 100 caracteres para o nome do cliente.&quot;);</span>
+        }
+<span class="nc bnc" id="L292" title="All 6 branches missed.">        if (clientePF.getTelefone() == null || clientePF.getTelefone().trim().isEmpty() || clientePF.getTelefone().charAt(1) == ' ') {</span>
+<span class="nc" id="L293">            throw new Exception(&quot;Informe o telefone&quot;);</span>
+        }
+
+<span class="nc bnc" id="L296" title="All 4 branches missed.">        if (clientePF.getCep() == null || clientePF.getCep().charAt(0) == '.') {</span>
+<span class="nc" id="L297">            throw new Exception(&quot;Informe o cep&quot;);</span>
+
+        }
+<span class="nc bnc" id="L300" title="All 2 branches missed.">        if (clientePF.getCep().length() != 10) {</span>
+<span class="nc" id="L301">            throw new Exception(&quot;Erro ao cadastrar cep. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L304" title="All 4 branches missed.">        if (clientePF.getLogradouro() == null || clientePF.getLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L305">            throw new Exception(&quot;Informe o endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L307" title="All 2 branches missed.">        if (clientePF.getLogradouro().length() &gt; 60) {</span>
+<span class="nc" id="L308">            throw new Exception(&quot;Limite máximo de 60 caracteres para o endereço do cliente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L311" title="All 4 branches missed.">        if (clientePF.getNumeroLogradouro() == null || clientePF.getNumeroLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L312">            throw new Exception(&quot;Informe o número do endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        if (clientePF.getNumeroLogradouro().length() &gt; 20) {</span>
+<span class="nc" id="L315">            throw new Exception(&quot;Limite máximo de 20 caracteres para número do endereço do cliente.&quot;);</span>
+        }
+<span class="nc bnc" id="L317" title="All 4 branches missed.">        if (clientePF.getComplemento() != null &amp;&amp; clientePF.getComplemento().length() &gt; 20) {</span>
+<span class="nc" id="L318">            throw new Exception(&quot;Limite máximo de 20 caracteres para o complemento.&quot;);</span>
+        }
+<span class="nc bnc" id="L320" title="All 4 branches missed.">        if (clientePF.getBairro() == null || clientePF.getBairro().trim().isEmpty()) {</span>
+<span class="nc" id="L321">            throw new Exception(&quot;Informe o bairro&quot;);</span>
+        }
+<span class="nc bnc" id="L323" title="All 2 branches missed.">        if (clientePF.getBairro().length() &gt; 20) {</span>
+<span class="nc" id="L324">            throw new Exception(&quot;Limite máximo de 20 caracteres para o bairro.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L327" title="All 4 branches missed.">        if (clientePF.getCidade() == null || clientePF.getCidade().trim().isEmpty()) {</span>
+<span class="nc" id="L328">            throw new Exception(&quot;Informe a cidade&quot;);</span>
+        }
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        if (clientePF.getCidade().length() &gt; 20) {</span>
+<span class="nc" id="L331">            throw new Exception(&quot;Limite máximo de 20 caracteres para a cidade.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L334" title="All 4 branches missed.">        if (clientePF.getEstado() == null || clientePF.getEstado().trim().isEmpty()) {</span>
+<span class="nc" id="L335">            throw new Exception(&quot;Informe o estado&quot;);</span>
+        }
+<span class="nc bnc" id="L337" title="All 2 branches missed.">        if (clientePF.getEstado().length() != 2) {</span>
+<span class="nc" id="L338">            throw new Exception(&quot;Limite máximo de 2 caracteres para o estado.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L341" title="All 4 branches missed.">        if (clientePF.getEmail() == null || clientePF.getEmail().trim().isEmpty()) {</span>
+<span class="nc" id="L342">            throw new Exception(&quot;Informe o email&quot;);</span>
+        }
+<span class="nc bnc" id="L344" title="All 2 branches missed.">        if (clientePF.getEmail().length() &gt; 50) {</span>
+<span class="nc" id="L345">            throw new Exception(&quot;Limite máximo de 50 caracteres para o email.&quot;);</span>
+        }
+<span class="nc bnc" id="L347" title="All 4 branches missed.">        if (clientePF.getSexo() == null || clientePF.getSexo().trim().isEmpty()) {</span>
+<span class="nc" id="L348">            throw new Exception(&quot;Informe o sexo&quot;);</span>
+        }
+<span class="nc bnc" id="L350" title="All 2 branches missed.">        if (clientePF.getSexo().length() != 1) {</span>
+<span class="nc" id="L351">            throw new Exception(&quot;Limite de 1 caractere para o sexo.&quot;);</span>
+        }
+
+<span class="nc" id="L354">        boolean teste = verificaDuplicidadeClientePF(clientePF);</span>
+
+<span class="nc bnc" id="L356" title="All 2 branches missed.">        if (teste) {</span>
+<span class="nc" id="L357">            throw new Exception(&quot;Já existe um cliente para os dados informados&quot;);</span>
+        }
+<span class="nc" id="L359">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L360">        a.alterarClientePF(clientePF);</span>
+
+<span class="nc" id="L362">    }</span>
+
+    @Override
+    public void alterarClientePJ(ClientePessoaJuridica clientePJ) throws Exception {
+<span class="nc bnc" id="L366" title="All 2 branches missed.">        if (clientePJ == null) {</span>
+<span class="nc" id="L367">            throw new Exception(&quot;O objeto não foi instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L369" title="All 4 branches missed.">        if (clientePJ.getCli_Cnpj() == null || clientePJ.getCli_Cnpj().trim().isEmpty()) {</span>
+<span class="nc" id="L370">            throw new Exception(&quot;Informe o CNPJ&quot;);</span>
+        }
+<span class="nc bnc" id="L372" title="All 2 branches missed.">        if (clientePJ.getCli_Cnpj().length() != 18) {</span>
+<span class="nc" id="L373">            throw new Exception(&quot;Erro ao atualizar CNPJ. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L376" title="All 4 branches missed.">        if (clientePJ.getRazaoSocial() == null || clientePJ.getRazaoSocial().trim().isEmpty()) {</span>
+<span class="nc" id="L377">            throw new Exception(&quot;Informe a razão social.&quot;);</span>
+        }
+<span class="nc bnc" id="L379" title="All 2 branches missed.">        if (clientePJ.getRazaoSocial().length() &gt; 60) {</span>
+<span class="nc" id="L380">            throw new Exception(&quot;Limite máximo de 60 caracteres para a razão social.&quot;);</span>
+        }
+<span class="nc bnc" id="L382" title="All 6 branches missed.">        if (clientePJ.getTelefone() == null || clientePJ.getTelefone().trim().isEmpty() || clientePJ.getTelefone().charAt(1) == ' ') {</span>
+<span class="nc" id="L383">            throw new Exception(&quot;Informe o telefone&quot;);</span>
+        }
+
+<span class="nc bnc" id="L386" title="All 4 branches missed.">        if (clientePJ.getCep() == null || clientePJ.getCep().charAt(0) == '.') {</span>
+<span class="nc" id="L387">            throw new Exception(&quot;Informe o cep&quot;);</span>
+
+        }
+<span class="nc bnc" id="L390" title="All 2 branches missed.">        if (clientePJ.getCep().length() != 10) {</span>
+<span class="nc" id="L391">            throw new Exception(&quot;Erro ao cadastrar cep. Verifique a quantidade de dígitos e tente novamente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L394" title="All 4 branches missed.">        if (clientePJ.getLogradouro() == null || clientePJ.getLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L395">            throw new Exception(&quot;Informe o endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L397" title="All 2 branches missed.">        if (clientePJ.getLogradouro().length() &gt; 60) {</span>
+<span class="nc" id="L398">            throw new Exception(&quot;Limite máximo de 60 caracteres para o endereço do cliente.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L401" title="All 4 branches missed.">        if (clientePJ.getNumeroLogradouro() == null || clientePJ.getNumeroLogradouro().trim().isEmpty()) {</span>
+<span class="nc" id="L402">            throw new Exception(&quot;Informe o número do endereço&quot;);</span>
+        }
+<span class="nc bnc" id="L404" title="All 2 branches missed.">        if (clientePJ.getNumeroLogradouro().length() &gt; 20) {</span>
+<span class="nc" id="L405">            throw new Exception(&quot;Limite máximo de 20 caracteres para número do endereço do cliente.&quot;);</span>
+        }
+<span class="nc bnc" id="L407" title="All 4 branches missed.">        if (clientePJ.getComplemento() != null &amp;&amp; clientePJ.getComplemento().length() &gt; 20) {</span>
+<span class="nc" id="L408">            throw new Exception(&quot;Limite máximo de 20 caracteres para o complemento.&quot;);</span>
+        }
+<span class="nc bnc" id="L410" title="All 4 branches missed.">        if (clientePJ.getBairro() == null || clientePJ.getBairro().trim().isEmpty()) {</span>
+<span class="nc" id="L411">            throw new Exception(&quot;Informe o bairro&quot;);</span>
+        }
+<span class="nc bnc" id="L413" title="All 2 branches missed.">        if (clientePJ.getBairro().length() &gt; 20) {</span>
+<span class="nc" id="L414">            throw new Exception(&quot;Limite máximo de 20 caracteres para o bairro.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L417" title="All 4 branches missed.">        if (clientePJ.getCidade() == null || clientePJ.getCidade().trim().isEmpty()) {</span>
+<span class="nc" id="L418">            throw new Exception(&quot;Informe a cidade&quot;);</span>
+        }
+<span class="nc bnc" id="L420" title="All 2 branches missed.">        if (clientePJ.getCidade().length() &gt; 20) {</span>
+<span class="nc" id="L421">            throw new Exception(&quot;Limite máximo de 20 caracteres para a cidade.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L424" title="All 4 branches missed.">        if (clientePJ.getEstado() == null || clientePJ.getEstado().trim().isEmpty()) {</span>
+<span class="nc" id="L425">            throw new Exception(&quot;Informe o estado&quot;);</span>
+        }
+<span class="nc bnc" id="L427" title="All 2 branches missed.">        if (clientePJ.getEstado().length() != 2) {</span>
+<span class="nc" id="L428">            throw new Exception(&quot;Erro ao cadastrar o estado.Verifique a quantidade de digitos e tente novamente. Limite de 2 caracteres&quot;</span>
+                    + &quot; para a o estado Ex: SP . &quot;);
+        }
+
+<span class="nc bnc" id="L432" title="All 4 branches missed.">        if (clientePJ.getEmail() == null || clientePJ.getEmail().trim().isEmpty()) {</span>
+<span class="nc" id="L433">            throw new Exception(&quot;Informe o email&quot;);</span>
+        }
+<span class="nc bnc" id="L435" title="All 2 branches missed.">        if (clientePJ.getEmail().length() &gt; 50) {</span>
+<span class="nc" id="L436">            throw new Exception(&quot;Limite máximo de 50 caracteres para o email.&quot;);</span>
+        }
+
+<span class="nc" id="L439">        boolean teste = verificaDuplicidadeClientePJ(clientePJ);</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">        if (teste) {</span>
+<span class="nc" id="L441">            throw new Exception(&quot;Já existe um cliente para os dados informados&quot;);</span>
+        }
+<span class="nc" id="L443">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L444">        a.alterarClientePJ(clientePJ);</span>
+<span class="nc" id="L445">    }</span>
+
+    @Override
+    public boolean verificaDuplicidadeClientePF(ClientePessoaFisica filtroPF) throws Exception {
+<span class="nc bnc" id="L449" title="All 2 branches missed.">        if (filtroPF == null) {</span>
+<span class="nc" id="L450">            throw new Exception(&quot;O objeto deve ser instanciado&quot;);</span>
+        }
+
+<span class="nc bnc" id="L453" title="All 4 branches missed.">        if ((filtroPF.getCli_Cpf() == null || filtroPF.getCli_Cpf().trim().isEmpty())) {</span>
+<span class="nc" id="L454">            throw new Exception(&quot;Informe o cpf do cliente&quot;);</span>
+
+        }
+
+<span class="nc" id="L458">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L459">        boolean duplicada = a.verificaDuplicidadeClientePF(filtroPF);</span>
+<span class="nc" id="L460">        return duplicada;</span>
+    }
+
+    @Override
+    public boolean verificaDuplicidadeClientePJ(ClientePessoaJuridica filtroPJ) throws Exception {
+
+<span class="nc bnc" id="L466" title="All 2 branches missed.">        if (filtroPJ == null) {</span>
+<span class="nc" id="L467">            throw new Exception(&quot;O objeto deve ser instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L469" title="All 4 branches missed.">        if (filtroPJ.getCli_Cnpj() == null || filtroPJ.getCli_Cnpj().trim().isEmpty()) {</span>
+<span class="nc" id="L470">            throw new Exception(&quot;Informe o cnpj do cliente&quot;);</span>
+        }
+
+<span class="nc" id="L473">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L474">        boolean duplicada = a.verificaDuplicidadeClientePJ(filtroPJ);</span>
+<span class="nc" id="L475">        return duplicada;</span>
+
+    }
+
+    @Override
+    public ArrayList&lt;ClientePessoaFisica&gt; listarClientePF() throws Exception {
+<span class="nc" id="L481">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L482">        ArrayList&lt;ClientePessoaFisica&gt; lista = a.listarClientePF();</span>
+<span class="nc" id="L483">        return lista;</span>
+
+    }
+
+    @Override
+    public ArrayList&lt;ClientePessoaJuridica&gt; listarClientePJ() throws Exception {
+<span class="nc" id="L489">        DadosCliente a = new DadosCliente();</span>
+<span class="nc" id="L490">        ArrayList&lt;ClientePessoaJuridica&gt; lista = a.listarClientePJ();</span>
+<span class="nc" id="L491">        return lista;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

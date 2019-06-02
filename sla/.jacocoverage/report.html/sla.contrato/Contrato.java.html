@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Contrato.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.contrato</a> &gt; <span class="el_source">Contrato.java</span></div><h1>Contrato.java</h1><pre class="source lang-java linenums">package sla.contrato;
+
+import java.util.ArrayList;
+import java.util.Date;
+import sla.Equipamento.Equipamento;
+
+<span class="fc" id="L7">public  class Contrato {</span>
+
+    private int idContrato;
+    private Date inicioContrato;
+    private Date fimContrato;
+    private int umAtendimento;
+    private int fimAtendimento;
+    private int totalEquipamento;
+    private float valor;
+    private boolean cobrePeca;
+    private ArrayList&lt;Equipamento&gt; equipamento;
+
+    /**
+     * @return the idContrato
+     */
+    public int getIdContrato() {
+<span class="fc" id="L23">        return idContrato;</span>
+    }
+
+    /**
+     * @param idContrato the idContrato to set
+     */
+    public void setIdContrato(int idContrato) {
+<span class="fc" id="L30">        this.idContrato = idContrato;</span>
+<span class="fc" id="L31">    }</span>
+
+    /**
+     * @return the prazo
+     */
+    /**
+     * @return the umAtendimento
+     */
+    public int getUmAtendimento() {
+<span class="nc" id="L40">        return umAtendimento;</span>
+    }
+
+    /**
+     * @param umAtendimento the umAtendimento to set
+     */
+    public void setUmAtendimento(int umAtendimento) {
+<span class="fc" id="L47">        this.umAtendimento = umAtendimento;</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * @return the fimAtendimento
+     */
+    public int getFimAtendimento() {
+<span class="nc" id="L54">        return fimAtendimento;</span>
+    }
+
+    public void setFimAtendimento(int fimAtendimento) {
+<span class="fc" id="L58">        this.fimAtendimento = fimAtendimento;</span>
+<span class="fc" id="L59">    }</span>
+
+    public int getTotalEquipamento() {
+<span class="fc" id="L62">        return totalEquipamento;</span>
+    }
+
+    public void setTotalEquipamento(int totalEquipamento) {
+<span class="fc" id="L66">        this.totalEquipamento = totalEquipamento;</span>
+<span class="fc" id="L67">    }</span>
+
+    public float getValor() {
+<span class="fc" id="L70">        return valor;</span>
+    }
+
+    public void setValor(float valor) {
+<span class="fc" id="L74">        this.valor = valor;</span>
+<span class="fc" id="L75">    }</span>
+
+    public boolean isCobrePeca() {
+<span class="nc" id="L78">        return cobrePeca;</span>
+    }
+
+    public void setCobrePeca(boolean cobrePeca) {
+<span class="fc" id="L82">        this.cobrePeca = cobrePeca;</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * @return the inicioContrato
+     */
+    public Date getInicioContrato() {
+<span class="fc" id="L89">        return inicioContrato;</span>
+    }
+
+    /**
+     * @param inicioContrato the inicioContrato to set
+     */
+    public void setInicioContrato(Date inicioContrato) {
+<span class="fc" id="L96">        this.inicioContrato = inicioContrato;</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * @return the fimContrato
+     */
+    public Date getFimContrato() {
+<span class="fc" id="L103">        return fimContrato;</span>
+    }
+
+    /**
+     * @param fimContrato the fimContrato to set
+     */
+    public void setFimContrato(Date fimContrato) {
+<span class="fc" id="L110">        this.fimContrato = fimContrato;</span>
+<span class="fc" id="L111">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

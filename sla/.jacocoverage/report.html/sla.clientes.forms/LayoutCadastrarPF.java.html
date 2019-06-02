@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LayoutCadastrarPF.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.clientes.forms</a> &gt; <span class="el_source">LayoutCadastrarPF.java</span></div><h1>LayoutCadastrarPF.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sla.clientes.forms;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+import jdk.nashorn.internal.ir.TryNode;
+import sla.clientes.ClientePessoaFisica;
+import sla.clientes.NegocioCliente;
+
+/**
+ *
+ * @author Consultor SCA 02
+ */
+public class LayoutCadastrarPF extends JFrame implements ActionListener {
+
+    String textoTelefone;
+    String textoCPF;
+<span class="nc" id="L30">    JButton jb = new JButton(&quot;CADASTRAR&quot;);</span>
+<span class="nc" id="L31">    JLabel JLMensagemCadastro = new JLabel(&quot;CADASTRO DE CLIENTES&quot;);</span>
+<span class="nc" id="L32">    JLabel JLMensagemPreenchaCampos = new JLabel(&quot;PREENCHA OS CAMPOS &quot;);</span>
+<span class="nc" id="L33">    JLabel JLnomeCliente = new JLabel(&quot;NOME&quot;);</span>
+<span class="nc" id="L34">    JLabel JLtelefoneCliente = new JLabel(&quot;TELEFONE&quot;);</span>
+<span class="nc" id="L35">    JLabel JLcepCliente = new JLabel(&quot;CEP&quot;);</span>
+<span class="nc" id="L36">    JLabel JLenderecoCliente = new JLabel(&quot;ENDEREÇO&quot;);</span>
+<span class="nc" id="L37">    JLabel JLnumeroEndereco = new JLabel(&quot;N°&quot;);</span>
+<span class="nc" id="L38">    JLabel JLcomplemento = new JLabel(&quot;COMPLEMENTO&quot;);</span>
+<span class="nc" id="L39">    JLabel JLbairro = new JLabel(&quot;BAIRRO&quot;);</span>
+<span class="nc" id="L40">    JLabel JLcidade = new JLabel(&quot;CIDADE&quot;);</span>
+<span class="nc" id="L41">    JLabel JLuf = new JLabel(&quot;UF&quot;);</span>
+<span class="nc" id="L42">    JLabel JLufex = new JLabel(&quot;Ex: SP&quot;);</span>
+<span class="nc" id="L43">    JLabel JLemail = new JLabel(&quot;EMAIL&quot;);</span>
+<span class="nc" id="L44">    JLabel JLcpf = new JLabel(&quot;CPF&quot;);</span>
+<span class="nc" id="L45">    JLabel JLsexoCliente = new JLabel(&quot;SEXO&quot;);</span>
+<span class="nc" id="L46">    JTextField JTnomeCliente = new JTextField();</span>
+    //   JFormattedTextField JTtelefoneCliente = new JFormattedTextField();
+<span class="nc" id="L48">    JFormattedTextField JTcepCliente = new JFormattedTextField();</span>
+<span class="nc" id="L49">    JTextField JTenderecoCliente = new JTextField();</span>
+<span class="nc" id="L50">    JTextField JTnumeroEndereco = new JTextField();</span>
+<span class="nc" id="L51">    JTextField JTcomplemento = new JTextField();</span>
+<span class="nc" id="L52">    JTextField JTbairro = new JTextField();</span>
+<span class="nc" id="L53">    JTextField JTcidade = new JTextField();</span>
+<span class="nc" id="L54">    JTextField JTuf = new JTextField();</span>
+<span class="nc" id="L55">    JTextField JTemail = new JTextField();</span>
+    // JFormattedTextField JTcpf = new JFormattedTextField();
+<span class="nc" id="L57">    JRadioButton JRsexoMasculino = new JRadioButton(&quot;MASCULINO&quot;);</span>
+<span class="nc" id="L58">    JRadioButton JRsexoFeminino = new JRadioButton(&quot;FEMININO&quot;);</span>
+
+<span class="nc" id="L60">    public LayoutCadastrarPF(javax.swing.JFrame c) {</span>
+        try {
+            
+<span class="nc" id="L63">            c.setTitle(&quot;CADASTRO DE CLIENTES - PESSOA FÍSICA&quot;);</span>
+<span class="nc" id="L64">            c.setLocationRelativeTo(null);</span>
+<span class="nc" id="L65">            JFormattedTextField JTcpf = new JFormattedTextField(new MaskFormatter(&quot;###.###.###-##&quot;));</span>
+<span class="nc" id="L66">            JFormattedTextField JTtelefoneCliente = new JFormattedTextField(new MaskFormatter(&quot;(##)#.####-####&quot;));</span>
+
+<span class="nc" id="L68">            setLocationRelativeTo(null);</span>
+<span class="nc" id="L69">            setSize(700, 680);</span>
+<span class="nc" id="L70">            c.setTitle(&quot;CADASTRO DE CLIENTES - PESSOA FÍSICA&quot;);</span>
+<span class="nc" id="L71">            c.getContentPane().setLayout(null);</span>
+
+<span class="nc" id="L73">            jb.setBounds(400, 542, 100, 66);</span>
+<span class="nc" id="L74">            JRsexoMasculino.setBounds(111, 521, 92, 18);</span>
+<span class="nc" id="L75">            JRsexoFeminino.setBounds(237, 521, 79, 18);</span>
+<span class="nc" id="L76">            JLMensagemCadastro.setBounds(265, 21, 147, 47);</span>
+<span class="nc" id="L77">            JLnomeCliente.setBounds(6, 122, 41, 16);</span>
+<span class="nc" id="L78">            JLtelefoneCliente.setBounds(6, 162, 63, 16);</span>
+<span class="nc" id="L79">            JLcepCliente.setBounds(6, 196, 28, 16);</span>
+<span class="nc" id="L80">            JLenderecoCliente.setBounds(6, 232, 69, 16);</span>
+<span class="nc" id="L81">            JLnumeroEndereco.setBounds(6, 272, 70, 16);</span>
+<span class="nc" id="L82">            JLcomplemento.setBounds(6, 312, 92, 16);</span>
+<span class="nc" id="L83">            JLbairro.setBounds(6, 352, 45, 16);</span>
+<span class="nc" id="L84">            JLcidade.setBounds(6, 392, 45, 16);</span>
+<span class="nc" id="L85">            JLuf.setBounds(6, 438, 16, 16);</span>
+<span class="nc" id="L86">            JLufex.setBounds(167, 438, 35, 16);</span>
+<span class="nc" id="L87">            JLemail.setBounds(6, 478, 34, 16);</span>
+<span class="nc" id="L88">            JLsexoCliente.setBounds(6, 521, 35, 16);</span>
+<span class="nc" id="L89">            JLcpf.setBounds(6, 565, 24, 16);</span>
+<span class="nc" id="L90">            JTnomeCliente.setBounds(111, 122, 450, 28);</span>
+<span class="nc" id="L91">            JTtelefoneCliente.setBounds(111, 156, 108, 28);</span>
+<span class="nc" id="L92">            JTcepCliente.setBounds(111, 190, 81, 28);</span>
+<span class="nc" id="L93">            JTenderecoCliente.setBounds(111, 226, 301, 28);</span>
+<span class="nc" id="L94">            JTnumeroEndereco.setBounds(111, 266, 76, 28);</span>
+<span class="nc" id="L95">            JTcomplemento.setBounds(111, 306, 76, 28);</span>
+<span class="nc" id="L96">            JTbairro.setBounds(111, 346, 200, 28);</span>
+<span class="nc" id="L97">            JTcidade.setBounds(111, 386, 200, 28);</span>
+<span class="nc" id="L98">            JTuf.setBounds(111, 432, 38, 28);</span>
+<span class="nc" id="L99">            JTemail.setBounds(111, 472, 301, 28);</span>
+<span class="nc" id="L100">            JTcpf.setBounds(111, 559, 106, 28);</span>
+            // JLnomeCliente.setBounds(6, 122, 41, 16);
+<span class="nc" id="L102">            c.add(JLMensagemCadastro);</span>
+
+<span class="nc" id="L104">            c.add(JLnomeCliente);</span>
+<span class="nc" id="L105">            c.add(JLtelefoneCliente);</span>
+<span class="nc" id="L106">            c.add(JLcepCliente);</span>
+<span class="nc" id="L107">            c.add(JLenderecoCliente);</span>
+<span class="nc" id="L108">            c.add(JLnumeroEndereco);</span>
+<span class="nc" id="L109">            c.add(JLcomplemento);</span>
+<span class="nc" id="L110">            c.add(JLbairro);</span>
+<span class="nc" id="L111">            c.add(JLcidade);</span>
+<span class="nc" id="L112">            c.add(JLuf);</span>
+<span class="nc" id="L113">            c.add(JLufex);</span>
+<span class="nc" id="L114">            c.add(JLemail);</span>
+<span class="nc" id="L115">            c.add(JLcpf);</span>
+<span class="nc" id="L116">            c.add(JTnomeCliente);</span>
+<span class="nc" id="L117">            c.add(JTtelefoneCliente);</span>
+<span class="nc" id="L118">            c.add(JTcepCliente);</span>
+<span class="nc" id="L119">            c.add(JTenderecoCliente);</span>
+<span class="nc" id="L120">            c.add(JTnumeroEndereco);</span>
+<span class="nc" id="L121">            c.add(JTcomplemento);</span>
+<span class="nc" id="L122">            c.add(JTbairro);</span>
+<span class="nc" id="L123">            c.add(JTcidade);</span>
+<span class="nc" id="L124">            c.add(JTuf);</span>
+<span class="nc" id="L125">            c.add(JTemail);</span>
+<span class="nc" id="L126">            c.add(JTcpf);</span>
+<span class="nc" id="L127">            c.add(jb);</span>
+<span class="nc" id="L128">            c.add(JLsexoCliente);</span>
+<span class="nc" id="L129">            c.add(JRsexoFeminino);</span>
+<span class="nc" id="L130">            c.add(JRsexoMasculino);</span>
+
+<span class="nc" id="L132">            jb.setVisible(true);</span>
+<span class="nc" id="L133">            JRsexoFeminino.setVisible(true);</span>
+<span class="nc" id="L134">            JRsexoMasculino.setVisible(true);</span>
+<span class="nc" id="L135">            JLMensagemCadastro.setVisible(true);</span>
+<span class="nc" id="L136">            JLMensagemPreenchaCampos.setVisible(true);</span>
+<span class="nc" id="L137">            JLnomeCliente.setVisible(true);</span>
+<span class="nc" id="L138">            JLtelefoneCliente.setVisible(true);</span>
+<span class="nc" id="L139">            JLcepCliente.setVisible(true);</span>
+<span class="nc" id="L140">            JLenderecoCliente.setVisible(true);</span>
+<span class="nc" id="L141">            JLnumeroEndereco.setVisible(true);</span>
+<span class="nc" id="L142">            JLcomplemento.setVisible(true);</span>
+<span class="nc" id="L143">            JLbairro.setVisible(true);</span>
+<span class="nc" id="L144">            JLcidade.setVisible(true);</span>
+<span class="nc" id="L145">            JLuf.setVisible(true);</span>
+<span class="nc" id="L146">            JLufex.setVisible(true);</span>
+<span class="nc" id="L147">            JLemail.setVisible(true);</span>
+<span class="nc" id="L148">            JLsexoCliente.setVisible(true);</span>
+<span class="nc" id="L149">            JLcpf.setVisible(true);</span>
+<span class="nc" id="L150">            JTnomeCliente.setVisible(true);</span>
+<span class="nc" id="L151">            JTtelefoneCliente.setVisible(true);</span>
+<span class="nc" id="L152">            JTcepCliente.setVisible(true);</span>
+<span class="nc" id="L153">            JTenderecoCliente.setVisible(true);</span>
+<span class="nc" id="L154">            JTnumeroEndereco.setVisible(true);</span>
+<span class="nc" id="L155">            JTcomplemento.setVisible(true);</span>
+<span class="nc" id="L156">            JTbairro.setVisible(true);</span>
+<span class="nc" id="L157">            JTcidade.setVisible(true);</span>
+<span class="nc" id="L158">            JTuf.setVisible(true);</span>
+<span class="nc" id="L159">            JTemail.setVisible(true);</span>
+<span class="nc" id="L160">            JTcpf.setVisible(true);</span>
+<span class="nc" id="L161">            textoTelefone = JTtelefoneCliente.getText();</span>
+<span class="nc" id="L162">            textoCPF = JTcpf.getText();</span>
+<span class="nc" id="L163">            jb.addActionListener(this);</span>
+
+<span class="nc" id="L165">        } catch (Exception e) {</span>
+<span class="nc" id="L166">            JOptionPane.showMessageDialog(null, e.getMessage());</span>
+<span class="nc" id="L167">        }</span>
+
+<span class="nc" id="L169">    }</span>
+
+    public void teste() {
+
+<span class="nc" id="L173">    }</span>
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        if (ae.getSource() == jb) {</span>
+            try {
+<span class="nc" id="L179">                ClientePessoaFisica clientePF = new ClientePessoaFisica();</span>
+<span class="nc" id="L180">                NegocioCliente cliente = new NegocioCliente();</span>
+<span class="nc" id="L181">                clientePF.setLogradouro(JTenderecoCliente.getText());</span>
+<span class="nc" id="L182">                clientePF.setTelefone(textoTelefone);</span>
+<span class="nc" id="L183">                clientePF.setCep(JTcepCliente.getText());</span>
+<span class="nc" id="L184">                clientePF.setLogradouro(JTenderecoCliente.getText());</span>
+<span class="nc" id="L185">                clientePF.setNumeroLogradouro(JTnumeroEndereco.getText());</span>
+<span class="nc" id="L186">                clientePF.setComplemento(JTcomplemento.getText());</span>
+<span class="nc" id="L187">                clientePF.setBairro(JTbairro.getText());</span>
+<span class="nc" id="L188">                clientePF.setCidade(JTcidade.getText());</span>
+<span class="nc" id="L189">                clientePF.setEstado(JTuf.getText());</span>
+<span class="nc" id="L190">                clientePF.setEmail(JTemail.getText());</span>
+<span class="nc" id="L191">                clientePF.setCli_Cpf(textoCPF);</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">                if (JRsexoMasculino.isSelected()) {</span>
+<span class="nc" id="L193">                    clientePF.setSexo(&quot;M&quot;);</span>
+                }
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                if (JRsexoFeminino.isSelected()) {</span>
+<span class="nc" id="L196">                    clientePF.setSexo(&quot;F&quot;);</span>
+                }
+<span class="nc" id="L198">                cliente.cadastrarClientePF(clientePF);</span>
+<span class="nc" id="L199">            } catch (Exception e) {</span>
+<span class="nc" id="L200">                JOptionPane.showMessageDialog(this, e.getMessage());</span>
+<span class="nc" id="L201">            }</span>
+
+        }
+        
+        
+
+<span class="nc" id="L207">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

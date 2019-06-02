@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NegocioPeca.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.pecas</a> &gt; <span class="el_source">NegocioPeca.java</span></div><h1>NegocioPeca.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sla.pecas;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.management.RuntimeErrorException;
+
+/**
+ *
+ * @author Consultor SCA 02
+ */
+public class NegocioPeca implements InterfacePecaSigns {
+
+    private boolean sucessoOperacao;
+
+<span class="nc" id="L20">    public NegocioPeca() {</span>
+<span class="nc" id="L21">        this.sucessoOperacao = false;</span>
+<span class="nc" id="L22">    }</span>
+
+    public boolean isSucessoOperacao() {
+<span class="nc" id="L25">        return sucessoOperacao;</span>
+    }
+
+    public void setSucessoOperacao(boolean sucessoOperacao) {
+<span class="nc" id="L29">        this.sucessoOperacao = sucessoOperacao;</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public void cadastrarPeca(Peca peca) throws Exception {
+
+        try {
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if (peca == null) {</span>
+<span class="nc" id="L37">                throw new RuntimeException(&quot;O objeto não foi instanciado&quot;);</span>
+            }
+<span class="nc bnc" id="L39" title="All 4 branches missed.">            if ((peca.getDescricao() == null) || (peca.getDescricao().trim().isEmpty())) {</span>
+
+<span class="nc" id="L41">                throw new RuntimeException(&quot;Informe o nome da peça&quot;);</span>
+            }
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (peca.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L44">                throw new RuntimeException(&quot;Limite máximo de 50 caracteres para a descrição da peça&quot;);</span>
+            }
+
+<span class="nc bnc" id="L47" title="All 4 branches missed.">            if ((peca.getPreco() &lt;= 0) || ((peca.getPreco() &gt; Float.MAX_VALUE))) {</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                if (peca.getPreco() &gt; Float.MAX_VALUE) {</span>
+<span class="nc" id="L49">                    throw new RuntimeException(&quot;O número informado estoura a capacidade de armazenamento, Verifique o valor e tente novamente.&quot;);</span>
+                } else {
+<span class="nc" id="L51">                    throw new RuntimeException(&quot;Informe o Valor da peça. Somente valores acima de Zero são permitidos.&quot;);</span>
+                }
+
+            }
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if (verificaDuplicidadePeca(peca)) {</span>
+<span class="nc" id="L57">                throw new RuntimeException(&quot;Já existe uma peça para o nome informado.&quot;);</span>
+            }
+<span class="nc" id="L59">            DadosPeca dados = new DadosPeca();</span>
+<span class="nc" id="L60">            dados.cadastrarPeca(peca);</span>
+<span class="nc" id="L61">            setSucessoOperacao(true);</span>
+<span class="nc" id="L62">        } catch (Exception e) {</span>
+<span class="nc" id="L63">            throw e;</span>
+<span class="nc" id="L64">        }</span>
+
+<span class="nc" id="L66">    }</span>
+
+    @Override
+    public ArrayList&lt;Peca&gt; consultarPeca(Peca peca) throws Exception {
+        try {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (peca == null) {</span>
+<span class="nc" id="L72">                throw new RuntimeException(&quot;O objeto deve ser instanciado.&quot;);</span>
+            }
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if (peca.getCodigo() &lt;= 0) {</span>
+<span class="nc bnc" id="L75" title="All 6 branches missed.">                if (((peca.getDescricao() == null) == false) &amp;&amp; (peca.getDescricao().trim().isEmpty()) == false) {</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                    if (peca.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L77">                        throw new RuntimeException(&quot;Limite máximo de 50 caracteres&quot;);</span>
+                    }
+                   
+                } else {
+<span class="nc" id="L81">                    throw new RuntimeException(&quot;Informe o nome da peça&quot;);</span>
+
+                }
+            }
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            if (peca.getDescricao() == null) {</span>
+<span class="nc" id="L86">                peca.setDescricao(&quot;&quot;);</span>
+
+            }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (peca.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L90">                throw new RuntimeException(&quot;Limite máximo de 50 caracteres&quot;);</span>
+            }
+<span class="nc" id="L92">            DadosPeca a = new DadosPeca();</span>
+<span class="nc" id="L93">            ArrayList consultarPeca = a.consultarPeca(peca);</span>
+<span class="nc" id="L94">            return consultarPeca;</span>
+<span class="nc" id="L95">        } catch (Exception e) {</span>
+<span class="nc" id="L96">            throw e;</span>
+        }
+
+    }
+
+    @Override
+    public void removerPecaCod(Peca peca) throws Exception {
+
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (peca == null) {</span>
+<span class="nc" id="L105">            throw new RuntimeException(&quot;O objeto deve ser instanciado.&quot;);</span>
+        }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (peca.getCodigo() &lt;= 0) {</span>
+<span class="nc" id="L108">            throw new RuntimeException(&quot;Peça não localizada para o código informado&quot;);</span>
+        }
+
+<span class="nc" id="L111">        ArrayList&lt;Peca&gt; listaPecas = consultarPeca(peca);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (listaPecas.isEmpty()) {</span>
+<span class="nc" id="L113">            throw new RuntimeException(&quot;Peça não localizada&quot;);</span>
+        }
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (listaPecas.size() == 1) {</span>
+<span class="nc" id="L116">            peca = listaPecas.get(0);</span>
+<span class="nc" id="L117">            DadosPeca a = new DadosPeca();</span>
+<span class="nc" id="L118">            a.removerPecaCod(peca);</span>
+        }
+
+<span class="nc" id="L121">    }</span>
+
+    @Override
+    public void alterarPeca(Peca peca) throws Exception {
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (peca == null) {</span>
+<span class="nc" id="L126">            throw new RuntimeException(&quot;O objeto não foi instanciado&quot;);</span>
+        }
+
+<span class="nc bnc" id="L129" title="All 4 branches missed.">        if ((peca.getDescricao() == null) || (peca.getDescricao().trim().isEmpty())) {</span>
+<span class="nc" id="L130">            throw new RuntimeException(&quot;Informe o nome da peça&quot;);</span>
+        }
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (peca.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L133">            throw new RuntimeException(&quot;Limite máximo de 50 caracteres para a descrição da peça&quot;);</span>
+        }
+
+<span class="nc bnc" id="L136" title="All 4 branches missed.">        if ((peca.getPreco() &lt;= 0) || ((peca.getPreco() &gt; Float.MAX_VALUE))) {</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">            if (peca.getPreco() &gt; Float.MAX_VALUE) {</span>
+<span class="nc" id="L138">                throw new RuntimeException(&quot;O número informado estoura a capacidade de armazenamento, Verifique o valor e tente novamente.&quot;);</span>
+            } else {
+<span class="nc" id="L140">                throw new RuntimeException(&quot;Informe o Valor da peça. Somente valores acima de Zero são permitidos.&quot;);</span>
+            }
+
+        }
+
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (verificaDuplicidadePeca(peca)) {</span>
+<span class="nc" id="L146">            throw new RuntimeException(&quot;Já existe uma peça para o nome informado.&quot;);</span>
+        }
+
+<span class="nc" id="L149">        DadosPeca a = new DadosPeca();</span>
+<span class="nc" id="L150">        a.alterarPeca(peca);</span>
+
+<span class="nc" id="L152">    }</span>
+
+    @Override
+    public boolean verificaDuplicidadePeca(Peca filtro) throws Exception {
+        /*
+         if (filtro == null) {
+         throw new Exception(&quot;O objeto deve ser instanciado&quot;);
+         }
+         if (filtro.getDescricao().trim().isEmpty()) {
+         throw new Exception(&quot;Informe o nome do objeto&quot;);
+
+         }
+
+         if (filtro.getDescricao().length() &gt; 50) {
+         throw new Exception(&quot;Limite máximo de 50 caracteres para a descrição da peca&quot;);
+         }
+        
+         */
+
+<span class="nc" id="L171">        DadosPeca a = new DadosPeca();</span>
+<span class="nc" id="L172">        boolean duplicada = a.verificaDuplicidadePeca(filtro);</span>
+<span class="nc" id="L173">        return duplicada;</span>
+
+    }
+
+    @Override
+    public ArrayList&lt;Peca&gt; listarPeca(Peca filtro) throws Exception {
+        /*
+         if (filtro == null) {
+         throw new Exception(&quot;O objeto deve ser instanciado&quot;);
+         } */
+        /*   if (filtro.getDescricao().trim().isEmpty()) {
+         throw new Exception(&quot;Informe o nome da peça&quot;);
+
+         }       */
+<span class="nc" id="L187">        ArrayList&lt;Peca&gt; listaPecas = new ArrayList();</span>
+        try {
+<span class="nc" id="L189">            DadosPeca a = new DadosPeca();</span>
+<span class="nc" id="L190">            listaPecas = a.listarPeca(filtro);</span>
+<span class="nc" id="L191">            return listaPecas;</span>
+<span class="nc" id="L192">        } catch (Exception e) {</span>
+<span class="nc" id="L193">            throw e;</span>
+
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

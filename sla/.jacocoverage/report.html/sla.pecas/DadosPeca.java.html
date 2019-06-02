@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DadosPeca.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.pecas</a> &gt; <span class="el_source">DadosPeca.java</span></div><h1>DadosPeca.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sla.pecas;
+
+import conexaojdbc2018.conexao.Dados;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Consultor SCA 02
+ */
+<span class="nc" id="L17">public class DadosPeca extends Dados implements InterfacePecaSigns {</span>
+
+    @Override
+    public void cadastrarPeca(Peca peca) throws Exception {
+<span class="nc" id="L21">        String aux = peca.getDescricao().trim();</span>
+<span class="nc" id="L22">        aux = aux.substring(0, 1).toUpperCase() + aux.substring(1).toLowerCase();</span>
+<span class="nc" id="L23">        peca.setDescricao(aux);</span>
+<span class="nc" id="L24">        String sql = &quot; EXEC CADASTRARPECA ?,? ; &quot;;</span>
+
+<span class="nc" id="L26">        PreparedStatement stmt = super.conectarParametros().prepareStatement(sql);</span>
+<span class="nc" id="L27">        stmt.setString(1, peca.getDescricao());</span>
+<span class="nc" id="L28">        stmt.setFloat(2, peca.getPreco());</span>
+
+<span class="nc" id="L30">        stmt.executeUpdate();</span>
+<span class="nc" id="L31">        super.desconectar();</span>
+
+<span class="nc" id="L33">    }</span>
+
+    @Override
+    public ArrayList&lt;Peca&gt; consultarPeca(Peca peca) throws Exception {
+
+<span class="nc" id="L38">        String sql = &quot; EXEC CONSULTARPECA ?,? ;&quot;;</span>
+
+<span class="nc" id="L40">        PreparedStatement stmt = super.conectarParametros().prepareStatement(sql);</span>
+
+<span class="nc" id="L42">        stmt.setString(1, peca.getDescricao().trim());</span>
+<span class="nc" id="L43">        stmt.setInt(2, peca.getCodigo());</span>
+
+<span class="nc" id="L45">        ResultSet rs = stmt.executeQuery();</span>
+<span class="nc" id="L46">        ArrayList&lt;Peca&gt; pecasConsultadas = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        while (rs.next()) {</span>
+
+<span class="nc" id="L50">            Peca pecaConsultada = new Peca();</span>
+<span class="nc" id="L51">            pecaConsultada.setCodigo(rs.getInt(&quot;Pec_Codigo&quot;));</span>
+<span class="nc" id="L52">            pecaConsultada.setDescricao(rs.getString(&quot;Descricao&quot;));</span>
+<span class="nc" id="L53">            pecaConsultada.setPreco(rs.getFloat(&quot;Preco&quot;));</span>
+
+<span class="nc" id="L55">            pecasConsultadas.add(pecaConsultada);</span>
+
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">        super.desconectar();</span>
+<span class="nc" id="L59">        return pecasConsultadas;</span>
+
+    }
+
+    @Override
+    public void alterarPeca(Peca peca) throws Exception {
+
+
+<span class="nc" id="L67">        String aux = peca.getDescricao().trim();</span>
+<span class="nc" id="L68">        aux = aux.substring(0, 1).toUpperCase() + aux.substring(1).toLowerCase();</span>
+<span class="nc" id="L69">        peca.setDescricao(aux);</span>
+<span class="nc" id="L70">        String sql = &quot; EXEC ALTERARPECA ?,?,? ;&quot;;</span>
+<span class="nc" id="L71">        PreparedStatement stmt = super.conectarParametros().prepareStatement(sql);</span>
+<span class="nc" id="L72">        stmt.setString(1, peca.getDescricao());</span>
+<span class="nc" id="L73">        stmt.setFloat(2, peca.getPreco());</span>
+<span class="nc" id="L74">        stmt.setInt(3, peca.getCodigo());</span>
+<span class="nc" id="L75">        stmt.executeUpdate();</span>
+<span class="nc" id="L76">        super.desconectar();</span>
+
+<span class="nc" id="L78">    }</span>
+
+    @Override
+    public boolean verificaDuplicidadePeca(Peca filtro) throws Exception {
+
+<span class="nc" id="L83">        boolean retorno = false;</span>
+<span class="nc" id="L84">        String sql = &quot; SELECT  Descricao,Preco &quot;;</span>
+<span class="nc" id="L85">        sql += &quot; FROM PECA &quot;;</span>
+<span class="nc" id="L86">        sql += &quot; WHERE Descricao = ? &quot;;</span>
+<span class="nc" id="L87">        sql += &quot; AND Preco = ? &quot;;// +  + &quot;'&quot;;</span>
+
+<span class="nc" id="L89">        PreparedStatement stmt = super.conectarParametros().prepareStatement(sql);</span>
+<span class="nc" id="L90">        stmt.setString(1, filtro.getDescricao().trim());</span>
+<span class="nc" id="L91">        stmt.setFloat(2, filtro.getPreco());</span>
+
+<span class="nc" id="L93">        ResultSet rs = stmt.executeQuery();</span>
+
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        while (rs.next()) {</span>
+     
+<span class="nc" id="L97">            retorno = true;</span>
+            break;
+        }
+<span class="nc" id="L100">        super.desconectar();</span>
+<span class="nc" id="L101">        return retorno;</span>
+
+    }
+
+    @Override
+    public ArrayList&lt;Peca&gt; listarPeca(Peca filtro) throws Exception {
+
+<span class="nc" id="L108">        ArrayList&lt;Peca&gt; lista = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L109">        String sql = &quot; EXEC LISTARPECA;&quot;;</span>
+
+        // Preparando instrução
+<span class="nc" id="L112">        PreparedStatement stmt = super.conectarParametros().prepareStatement(sql);</span>
+
+        //executando a consulta e recebendo retorno do BD
+<span class="nc" id="L115">        ResultSet rs = stmt.executeQuery();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        while (rs.next()) {</span>
+<span class="nc" id="L117">            Peca peca = new Peca();</span>
+<span class="nc" id="L118">            peca.setCodigo(rs.getInt(&quot;Pec_Codigo&quot;));</span>
+<span class="nc" id="L119">            peca.setDescricao(rs.getString(&quot;Descricao&quot;));</span>
+<span class="nc" id="L120">            peca.setPreco(rs.getFloat(&quot;Preco&quot;));</span>
+<span class="nc" id="L121">            lista.add(peca);</span>
+<span class="nc" id="L122">        }</span>
+<span class="nc" id="L123">        super.desconectar();</span>
+<span class="nc" id="L124">        return lista;</span>
+
+    }
+
+    @Override
+    public void removerPecaCod(Peca peca) throws Exception {
+
+<span class="nc" id="L131">        String sql = &quot; EXEC REMOVERPECA ? ;&quot;;</span>
+<span class="nc" id="L132">        PreparedStatement stmt = super.conectarParametros().prepareStatement(sql);</span>
+<span class="nc" id="L133">        stmt.setInt(1, peca.getCodigo());</span>
+<span class="nc" id="L134">        stmt.executeUpdate();</span>
+<span class="nc" id="L135">        super.desconectar();</span>
+
+<span class="nc" id="L137">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

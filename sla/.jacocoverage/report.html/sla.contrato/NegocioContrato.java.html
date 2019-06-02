@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NegocioContrato.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.contrato</a> &gt; <span class="el_source">NegocioContrato.java</span></div><h1>NegocioContrato.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sla.contrato;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Fabiano
+ */
+<span class="fc" id="L14">public class NegocioContrato implements InterfaceContrato {</span>
+
+    @Override
+    public boolean cadastrarContratoPF(ContratoPF contratopf) throws Exception {
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        if (contratopf == null) {</span>
+<span class="fc" id="L19">            throw new RuntimeException(&quot;O Contrato não foi instanciado&quot;);</span>
+        }
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (contratopf.getClientePF() == null) {</span>
+<span class="fc" id="L23">            throw new RuntimeException(&quot;O Cliente não foi instanciado.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (contratopf.getInicioContrato()==null) {</span>
+<span class="nc" id="L27">            throw new RuntimeException(&quot;Campo data de inicio do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (contratopf.getFimContrato()==null) {</span>
+<span class="nc" id="L31">            throw new RuntimeException(&quot;Campo data de conclusão do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (contratopf.getInicioContrato().after(contratopf.getFimContrato())) {</span>
+<span class="fc" id="L35">            throw new RuntimeException(&quot;Data final anterior ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+        
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (contratopf.getInicioContrato().equals(contratopf.getFimContrato())) {</span>
+<span class="fc" id="L39">            throw new RuntimeException(&quot;Data final igual ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        if (contratopf.getInicioContrato().toString().trim().isEmpty()||contratopf.getInicioContrato().toString().trim()==null) {</span>
+<span class="nc" id="L43">            throw new RuntimeException(&quot;Informe a Data de início do contrato.&quot;);</span>
+        }
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (contratopf.getFimContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L46">            throw new RuntimeException(&quot;Informe a Data final do contrato.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (contratopf.getTotalEquipamento() &lt;= 0) {</span>
+<span class="fc" id="L50">            throw new RuntimeException(&quot;Informe a quantidade de equipamentos&quot;);</span>
+        }
+
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (contratopf.getValor() &lt;= 0) {</span>
+<span class="fc" id="L54">            throw new RuntimeException(&quot;Informe o valor do contrato&quot;);</span>
+        }
+<span class="nc bnc" id="L56" title="All 2 branches missed.">       if (verificarDuplicidadeContratoPF(contratopf)) {</span>
+<span class="nc" id="L57">            throw new RuntimeException(&quot;Já existe um contrato cadastrado com esse código para este equipamento.&quot;);</span>
+        }
+<span class="nc" id="L59">       DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L60">       d.cadastrarContratoPF(contratopf);</span>
+<span class="nc" id="L61">        return true;</span>
+    }
+
+    @Override
+    public boolean cadastrarContratoPJ(ContratoPJ contratopj) throws Exception {
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (contratopj == null) {</span>
+<span class="fc" id="L67">            throw new RuntimeException(&quot;O Contrato não foi instanciado&quot;);</span>
+        }
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (contratopj.getClientePJ() == null) {</span>
+<span class="fc" id="L71">            throw new RuntimeException(&quot;O Cliente não foi instanciado.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (contratopj.getInicioContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L75">            throw new RuntimeException(&quot;Campo data de inicio do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (contratopj.getFimContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L79">            throw new RuntimeException(&quot;Campo data de conclusão do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (contratopj.getInicioContrato().after(contratopj.getFimContrato())) {</span>
+<span class="fc" id="L83">            throw new RuntimeException(&quot;Data final anterior ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (contratopj.getFimContrato().equals(contratopj.getInicioContrato())) {</span>
+<span class="fc" id="L87">            throw new RuntimeException(&quot;Data final anterior ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (contratopj.getTotalEquipamento() &lt;= 0) {</span>
+<span class="fc" id="L91">            throw new RuntimeException(&quot;Informe a quantidade de equipamentos&quot;);</span>
+        }
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (contratopj.getValor() &lt;= 0) {</span>
+<span class="fc" id="L95">            throw new RuntimeException(&quot;Informe o valor do contrato&quot;);</span>
+        }/*
+        if (verificarDuplicidadeContratoPJ(contratopj)) {
+            throw new RuntimeException(&quot;Já existe um contrato cadastrado com esse código para este equipamento.&quot;);
+        }*/
+        //DadosContrato d = new DadosContrato();
+        //d.cadastrarContratoPJ(contratopj);
+<span class="fc" id="L102">        return true;</span>
+    }
+
+    @Override
+    public boolean removerContratoPF(ContratoPF contratopf) throws Exception {
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (contratopf == null) {</span>
+<span class="fc" id="L108">            throw new RuntimeException(&quot;O Contrato não foi instanciado&quot;);</span>
+        }
+
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (contratopf.getClientePF() == null) {</span>
+<span class="fc" id="L112">            throw new RuntimeException(&quot;O Cliente não foi instanciado.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (contratopf.getIdContrato() &lt;= 0) {</span>
+<span class="fc" id="L116">            throw new RuntimeException(&quot;Número de contrato inválido. Favor informar o contrato corretamente.&quot;);</span>
+        }
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (verificarDuplicidadeContratoPF(contratopf) == false) {</span>
+<span class="nc" id="L119">            throw new RuntimeException(&quot;Não existe um contrato cadastrado com esse código.&quot;);</span>
+        }
+<span class="nc" id="L121">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L122">        d.removerContratoPF(contratopf);</span>
+<span class="nc" id="L123">        return true;</span>
+    }
+
+    @Override
+    public boolean removerContratoPJ(ContratoPJ contratopj) throws Exception {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (contratopj == null) {</span>
+<span class="fc" id="L129">            throw new RuntimeException(&quot;O Contrato não foi instanciado&quot;);</span>
+        }
+
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (contratopj.getClientePJ() == null) {</span>
+<span class="fc" id="L133">            throw new RuntimeException(&quot;O Cliente não foi instanciado.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">        if (contratopj.getIdContrato() &lt;= 0) {</span>
+<span class="fc" id="L137">            throw new RuntimeException(&quot;Número de contrato inválido. Favor informar o contrato corretamente.&quot;);</span>
+        }
+<span class="nc bnc" id="L139" title="All 2 branches missed.">       if (!verificarDuplicidadeContratoPJ(contratopj)) {</span>
+<span class="nc" id="L140">            throw new RuntimeException(&quot;Não existe um contrato cadastrado com esse código.&quot;);</span>
+        }
+<span class="nc" id="L142">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L143">        d.removerContratoPJ(contratopj);</span>
+<span class="nc" id="L144">        return true;</span>
+    }
+
+    @Override
+    public boolean alterarContratoPF(ContratoPF contratopf) throws Exception {
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (contratopf == null) {</span>
+<span class="fc" id="L150">            throw new RuntimeException(&quot;O Contrato não foi instanciado&quot;);</span>
+        }
+
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (contratopf.getClientePF() == null) {</span>
+<span class="fc" id="L154">            throw new RuntimeException(&quot;O Cliente não foi instanciado.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if (contratopf.getInicioContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L158">            throw new RuntimeException(&quot;Campo data de inicio do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">        if (contratopf.getFimContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L162">            throw new RuntimeException(&quot;Campo data de conclusão do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (contratopf.getInicioContrato().after(contratopf.getFimContrato())) {</span>
+<span class="fc" id="L166">            throw new RuntimeException(&quot;Data final anterior ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+<span class="fc bfc" id="L168" title="All 2 branches covered.">         if (contratopf.getInicioContrato().equals(contratopf.getFimContrato())) {</span>
+<span class="fc" id="L169">            throw new RuntimeException(&quot;Data final igual ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (contratopf.getInicioContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L172">            throw new RuntimeException(&quot;Informe a Data de início do contrato.&quot;);</span>
+        }
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        if (contratopf.getFimContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L175">            throw new RuntimeException(&quot;Informe a Data final do contrato.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (contratopf.getTotalEquipamento() &lt;= 0) {</span>
+<span class="fc" id="L179">            throw new RuntimeException(&quot;Informe a quantidade de equipamentos&quot;);</span>
+        }
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">        if (contratopf.getValor() &lt;= 0) {</span>
+<span class="fc" id="L182">            throw new RuntimeException(&quot;Informe o valor do contrato&quot;);</span>
+        }
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (verificarDuplicidadeContratoPF(contratopf)) {</span>
+<span class="nc" id="L185">            throw new RuntimeException(&quot;Já existe um contrato cadastrado com esse código para este equipamento.&quot;);</span>
+        }
+<span class="nc" id="L187">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L188">        d.alterarContratoPF(contratopf);</span>
+<span class="nc" id="L189">        return true;</span>
+    }
+
+    @Override
+    public boolean alterarContratoPJ(ContratoPJ contratopj) throws Exception {
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (contratopj == null) {</span>
+<span class="fc" id="L195">            throw new RuntimeException(&quot;O Contrato não foi instanciado&quot;);</span>
+        }
+
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (contratopj.getClientePJ() == null) {</span>
+<span class="fc" id="L199">            throw new RuntimeException(&quot;O Cliente não foi instanciado.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        if (contratopj.getInicioContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L203">            throw new RuntimeException(&quot;Campo data de inicio do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L206" title="1 of 2 branches missed.">        if (contratopj.getFimContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L207">            throw new RuntimeException(&quot;Campo data de conclusão do contrato vazio, preencher data corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L210" title="All 2 branches covered.">        if (contratopj.getInicioContrato().after(contratopj.getFimContrato())) {</span>
+<span class="fc" id="L211">            throw new RuntimeException(&quot;Data final anterior ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L214" title="All 2 branches covered.">          if (contratopj.getInicioContrato().equals(contratopj.getFimContrato())) {</span>
+<span class="fc" id="L215">            throw new RuntimeException(&quot;Data final igual ao início do contrato, informar datas corretamente.&quot;);</span>
+        }
+
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        if (contratopj.getInicioContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L219">            throw new RuntimeException(&quot;Informe a Data de início do contrato.&quot;);</span>
+        }
+        
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">        if (contratopj.getFimContrato().toString().trim().isEmpty()) {</span>
+<span class="nc" id="L223">            throw new RuntimeException(&quot;Informe a Data final do contrato.&quot;);</span>
+        }
+
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (contratopj.getTotalEquipamento() &lt;= 0) {</span>
+<span class="fc" id="L227">            throw new RuntimeException(&quot;Informe a quantidade de equipamentos&quot;);</span>
+        }
+
+<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        if (contratopj.getValor() &lt;= 0) {</span>
+<span class="fc" id="L231">            throw new RuntimeException(&quot;Informe o valor do contrato&quot;);</span>
+        }
+       
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (verificarDuplicidadeContratoPJ(contratopj)) {</span>
+<span class="nc" id="L235">            throw new RuntimeException(&quot;Já existe um contrato cadastrado com esse código para este equipamento.&quot;);</span>
+        } 
+<span class="nc" id="L237">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L238">        d.alterarContratoPJ(contratopj);</span>
+<span class="nc" id="L239">        return true;</span>
+    }
+
+    @Override
+    public ArrayList&lt;ContratoPF&gt; consultarPFContrato(ContratoPF contratopf) throws Exception {
+        ArrayList&lt;ContratoPF&gt; lista;
+        
+<span class="nc bnc" id="L246" title="All 2 branches missed.">        if(contratopf == null){</span>
+<span class="nc" id="L247">           throw new RuntimeException(&quot;Informe o contrato&quot;);</span>
+        }
+<span class="nc" id="L249">        DadosContrato dao = new DadosContrato();</span>
+<span class="nc" id="L250">        lista= dao.consultarPFContrato(contratopf);</span>
+<span class="nc" id="L251">        return lista;</span>
+    }
+
+    @Override
+    public ArrayList&lt;ContratoPJ&gt; consultarPJContrato(ContratoPJ contratopj) throws Exception {
+          ArrayList&lt;ContratoPJ&gt; lista;
+        
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        if(contratopj == null){</span>
+<span class="nc" id="L259">           throw new RuntimeException(&quot;Informe o contrato&quot;);</span>
+        }
+<span class="nc" id="L261">        DadosContrato dao = new DadosContrato();</span>
+<span class="nc" id="L262">        lista= dao.consultarPJContrato(contratopj);</span>
+<span class="nc" id="L263">        return lista;</span>
+    }
+
+    @Override
+    public ArrayList&lt;ContratoPF&gt; listarContratoPF() throws Exception {
+<span class="nc" id="L268">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L269">        ArrayList&lt;ContratoPF&gt; lista = d.listarContratoPF();</span>
+<span class="nc" id="L270">        return lista;</span>
+    }
+
+    @Override
+    public ArrayList&lt;ContratoPJ&gt; listarContratoPJ() throws Exception {
+<span class="nc" id="L275">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L276">        ArrayList&lt;ContratoPJ&gt; lista = d.listarContratoPJ();</span>
+<span class="nc" id="L277">        return lista;</span>
+    }
+
+    @Override
+    public Boolean verificarDuplicidadeContratoPF(ContratoPF filtroPF) throws Exception {
+<span class="fc" id="L282">       boolean teste = false;</span>
+<span class="fc" id="L283">       DadosContrato d = new DadosContrato();</span>
+<span class="pc bpc" id="L284" title="1 of 2 branches missed.">        if(filtroPF == null){</span>
+<span class="fc" id="L285">           throw new RuntimeException(&quot;Informe o contrato&quot;);</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        }else if (d.verificarDuplicidadeContratoPF(filtroPF)){</span>
+<span class="nc" id="L287">           teste = true;</span>
+     }
+<span class="nc" id="L289">        return teste;</span>
+    
+    }
+
+    @Override
+    public Boolean verificarDuplicidadeContratoPJ(ContratoPJ filtroPJ) throws Exception {
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">        if(filtroPJ == null){</span>
+<span class="nc" id="L296">           throw new RuntimeException(&quot;Informe o contrato&quot;);</span>
+        }
+<span class="fc" id="L298">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L299">        boolean teste =  d.verificarDuplicidadeContratoPJ(filtroPJ);</span>
+<span class="nc" id="L300">        return teste;</span>
+    }
+
+    @Override
+    public Boolean verificarContratoPF(ContratoPF filtroPF) throws Exception {
+<span class="nc bnc" id="L305" title="All 2 branches missed.">        if(filtroPF == null){</span>
+<span class="nc" id="L306">           throw new RuntimeException(&quot;Informe o contrato&quot;);</span>
+        }
+<span class="nc" id="L308">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L309">        boolean teste =  d.verificarContratoPF(filtroPF);</span>
+<span class="nc" id="L310">        return teste;</span>
+    }
+
+    @Override
+    public Boolean verificarContratoPJ(ContratoPJ filtroPJ) throws Exception {
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        if(filtroPJ == null){</span>
+<span class="nc" id="L316">           throw new RuntimeException(&quot;Informe o contrato&quot;);</span>
+        }
+<span class="nc" id="L318">        DadosContrato d = new DadosContrato();</span>
+<span class="nc" id="L319">        boolean teste =  d.verificarContratoPJ(filtroPJ);</span>
+<span class="nc" id="L320">        return teste;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

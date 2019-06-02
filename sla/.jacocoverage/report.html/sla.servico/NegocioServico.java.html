@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NegocioServico.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.servico</a> &gt; <span class="el_source">NegocioServico.java</span></div><h1>NegocioServico.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sla.servico;
+
+import java.util.ArrayList;
+
+<span class="nc" id="L10">public class NegocioServico implements InterfaceServico {</span>
+
+    @Override
+    public void cadastrarServico(Servico servico) throws Exception {
+
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (servico == null) {</span>
+<span class="nc" id="L16">            throw new Exception(&quot;O servico não foi instanciado&quot;);</span>
+        }
+
+<span class="nc bnc" id="L19" title="All 4 branches missed.">        if ((servico.getDescricao() == null) || (servico.getDescricao().trim().isEmpty())) {</span>
+<span class="nc" id="L20">            throw new Exception(&quot;Informe o nome do servico&quot;);</span>
+        }
+
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (servico.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L24">            throw new Exception(&quot;Limite máximo de 50 caracteres para a descrição do serviço&quot;);</span>
+        }
+
+<span class="nc bnc" id="L27" title="All 4 branches missed.">        if ((servico.getPreco() &lt;= 0) || ((servico.getPreco() &gt; Float.MAX_VALUE))) {</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            if (servico.getPreco() &gt; Float.MAX_VALUE) {</span>
+<span class="nc" id="L29">                throw new Exception(&quot;O número informado estoura a capacidade de armazenamento, Verifique o valor e tente novamente.&quot;);</span>
+            } else {
+<span class="nc" id="L31">                throw new Exception(&quot;Informe o Valor do servico. Somente valores acima de Zero são permitidos.&quot;);</span>
+            }
+
+        }
+
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (verificaDuplicidadeServico(servico)) {</span>
+<span class="nc" id="L37">            throw new Exception(&quot;Já existe uma peça para o nome informado.&quot;);</span>
+        }
+<span class="nc" id="L39">        DadosServico dados = new DadosServico();</span>
+<span class="nc" id="L40">        dados.cadastrarServico(servico);</span>
+<span class="nc" id="L41">    }</span>
+
+    @Override
+    public ArrayList&lt;Servico&gt; consultarServico(Servico servico) throws Exception {
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (servico == null) {</span>
+<span class="nc" id="L46">            throw new Exception(&quot;O objeto deve ser instanciado.&quot;);</span>
+        }
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (servico.getCodServico() &lt;= 0) {</span>
+<span class="nc bnc" id="L49" title="All 6 branches missed.">            if (((servico.getDescricao() == null) == false) &amp;&amp; (servico.getDescricao().trim().isEmpty()) == false) {</span>
+<span class="nc" id="L50">                DadosServico a = new DadosServico();</span>
+<span class="nc" id="L51">                ArrayList consultarServico = a.consultarServico(servico);</span>
+
+<span class="nc" id="L53">                return consultarServico;</span>
+
+            } else {
+<span class="nc" id="L56">                throw new Exception(&quot;Informe o nome do serviço&quot;);</span>
+
+            }
+        }
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (servico.getDescricao() == null) {</span>
+<span class="nc" id="L61">            DadosServico a = new DadosServico();</span>
+<span class="nc" id="L62">            ArrayList consultarServico = a.consultarServico(servico);</span>
+
+<span class="nc" id="L64">            return consultarServico;</span>
+        }
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (servico.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L67">            throw new Exception(&quot;Limite máximo de 50 caracteres para a descrição do serviço&quot;);</span>
+        }
+<span class="nc" id="L69">        DadosServico a = new DadosServico();</span>
+<span class="nc" id="L70">        ArrayList&lt;Servico&gt; consultarServico = a.consultarServico(servico);</span>
+
+<span class="nc" id="L72">        return consultarServico;</span>
+    }
+
+    /*
+    public void removerServicoNome(Servico servico) throws Exception {
+              if (servico == null) {
+            throw new Exception(&quot;O serviço deve ser instanciado&quot;);
+        }
+        if (servico.getDescricao().trim().isEmpty()) {
+            throw new Exception(&quot;Informe o nome do serviço&quot;);
+        }
+        if (servico.getPreco() &lt;= 0) {
+            throw new Exception(&quot;Informe o Valor do servico. Somente valores acima de Zero são permitidos.&quot;);
+        }
+
+        DadosServico dados = new DadosServico();
+        boolean servicoDuplicado = dados.verificaDuplicidadeServico(servico);
+        if (servicoDuplicado) {
+            throw new Exception(&quot;Já existe um serviço para o nome informado.&quot;);
+        }
+    }
+     */
+    @Override
+    public void removerServicoCod(Servico servico) throws Exception {
+        /* 
+        if (servico == null) {
+            throw new Exception(&quot;O serviço deve ser instanciado&quot;);
+        }
+        if (servico.getDescricao().trim().isEmpty()) {
+            throw new Exception(&quot;Informe o nome do serviço&quot;);
+        }
+        if (servico.getPreco() &lt;= 0) {
+            throw new Exception(&quot;Informe o Valor do servico. Somente valores acima de Zero são permitidos.&quot;);
+        }
+
+        DadosServico dados = new DadosServico();
+        boolean servicoDuplicado = dados.verificaDuplicidadeServico(servico);
+        if (servicoDuplicado) {
+            throw new Exception(&quot;Já existe um serviço para o nome informado.&quot;);
+        }
+         */
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (servico == null) {</span>
+<span class="nc" id="L115">            throw new Exception(&quot;O objeto deve ser instanciado.&quot;);</span>
+        }
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if (servico.getCodServico() &lt;= 0) {</span>
+<span class="nc" id="L118">            throw new Exception(&quot;Servico não localizado para o código informado&quot;);</span>
+        }
+
+<span class="nc" id="L121">        ArrayList&lt;Servico&gt; listaServico = consultarServico(servico);</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        if (listaServico.isEmpty()) {</span>
+<span class="nc" id="L123">            throw new Exception(&quot;Serviço não localizado&quot;);</span>
+        }
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (listaServico.size() == 1) {</span>
+<span class="nc" id="L126">            DadosServico a = new DadosServico();</span>
+<span class="nc" id="L127">            a.removerServicoCod(servico);</span>
+        }
+
+<span class="nc" id="L130">    }</span>
+
+    @Override
+    public void alterarServico(Servico servico) throws Exception {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (servico == null) {</span>
+<span class="nc" id="L135">            throw new Exception(&quot;O objeto não foi instanciado&quot;);</span>
+        }
+
+<span class="nc bnc" id="L138" title="All 4 branches missed.">        if ((servico.getDescricao() == null) || (servico.getDescricao().trim().isEmpty())) {</span>
+<span class="nc" id="L139">            throw new Exception(&quot;Informe o nome do serviço&quot;);</span>
+        }
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        if (servico.getDescricao().length() &gt; 50) {</span>
+<span class="nc" id="L142">            throw new Exception(&quot;Limite máximo de 50 caracteres para a descrição da peça&quot;);</span>
+        }
+
+<span class="nc bnc" id="L145" title="All 4 branches missed.">        if ((servico.getPreco() &lt;= 0) || ((servico.getPreco() &gt; Float.MAX_VALUE))) {</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (servico.getPreco() &gt; Float.MAX_VALUE) {</span>
+<span class="nc" id="L147">                throw new Exception(&quot;O número informado estoura a capacidade de armazenamento, Verifique o valor e tente novamente.&quot;);</span>
+            } else {
+<span class="nc" id="L149">                throw new Exception(&quot;Informe o Valor da peça. Somente valores acima de Zero são permitidos.&quot;);</span>
+            }
+
+        }
+
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        if (verificaDuplicidadeServico(servico)) {</span>
+<span class="nc" id="L155">            throw new Exception(&quot;Já existe um serviço para o nome informado.&quot;);</span>
+        }
+
+<span class="nc" id="L158">        DadosServico a = new DadosServico();</span>
+<span class="nc" id="L159">        a.alterarServico(servico);</span>
+<span class="nc" id="L160">    }</span>
+
+    @Override
+    public boolean verificaDuplicidadeServico(Servico filtro) throws Exception {
+
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (filtro == null) {</span>
+<span class="nc" id="L166">            throw new Exception(&quot;O objeto deve ser instanciado&quot;);</span>
+        }
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (filtro.getDescricao().trim().isEmpty()) {</span>
+<span class="nc" id="L169">            throw new Exception(&quot;Informe o nome do serviço&quot;);</span>
+
+        }
+
+<span class="nc" id="L173">        DadosServico a = new DadosServico();</span>
+<span class="nc" id="L174">        boolean duplicada = a.verificaDuplicidadeServico(filtro);</span>
+<span class="nc" id="L175">        return duplicada;</span>
+
+    }
+
+    @Override
+    public ArrayList&lt;Servico&gt; listarServico() throws Exception {
+
+        /*
+        if (filtro.getDescricao().trim().isEmpty()) {
+            throw new Exception(&quot;Informe o nome do serviço&quot;);
+
+        }   */
+<span class="nc" id="L187">        DadosServico a = new DadosServico();</span>
+<span class="nc" id="L188">        ArrayList&lt;Servico&gt; listaServicos = a.listarServico();</span>
+<span class="nc" id="L189">        return listaServicos;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Dados.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">conexaojdbc2018.conexao</a> &gt; <span class="el_source">Dados.java</span></div><h1>Dados.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package conexaojdbc2018.conexao;
+
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+/**
+ *
+ * @author professor
+ */
+<span class="fc" id="L19">public class Dados  {</span>
+
+    private Statement stmt;
+    private Connection conn;
+    
+    //parâmetros de conexão
+<span class="fc" id="L25">    private final String driverPostGres = &quot;org.postgresql.Driver&quot;;</span>
+<span class="fc" id="L26">    private final String driverSqlServer = &quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;;</span>
+<span class="fc" id="L27">    private final String driverMySql = &quot;com.mysql.jdbc.Driver&quot;;</span>
+<span class="fc" id="L28">    private final String local = &quot;DESKTOP-S9JSJIA\\SQLEXPRESS&quot;;</span>
+<span class="fc" id="L29">    private final String banco = &quot;SLA&quot;;</span>
+<span class="fc" id="L30">    private final String usuario = &quot;sa&quot;;</span>
+<span class="fc" id="L31">    private final String senha = &quot;Bernardo10&quot;;</span>
+
+    /*private Statement conectar() throws Exception {
+        return this.conectarSqlServer();
+    }*/
+
+    public Connection conectarParametros() throws Exception {
+<span class="nc" id="L38">        this.conectarSqlServer();</span>
+<span class="nc" id="L39">        return conn;</span>
+    }
+
+    public void desconectar() throws SQLException {
+<span class="nc" id="L43">        conn.close();</span>
+<span class="nc" id="L44">    }</span>
+
+    private Statement conectarPostGreSql() throws Exception {
+        //string de conexão
+<span class="nc" id="L48">        String url = &quot;jdbc:postgresql://&quot; + local + &quot;/&quot; + banco + &quot;?charSet=LATIN1&quot;;</span>
+        //vínculo com o driver de conexão
+<span class="nc" id="L50">        Class.forName(driverPostGres);</span>
+        //obtendo a conexão
+<span class="nc" id="L52">        conn = DriverManager.getConnection(url, usuario, senha);</span>
+<span class="nc" id="L53">        return conn.createStatement();</span>
+        //return stmt;
+    }
+
+    private Statement conectarSqlServer() throws Exception {
+        //string de conexão
+    
+<span class="fc" id="L60">        String url = &quot;jdbc:sqlserver://&quot; + local + &quot;:1433;DatabaseName=&quot; + banco;</span>
+        //vínculo com o driver de conexão
+<span class="fc" id="L62">        Class.forName(driverSqlServer);</span>
+<span class="nc" id="L63">        conn = DriverManager.getConnection(url, usuario, senha);</span>
+<span class="nc" id="L64">        stmt = conn.createStatement();</span>
+<span class="nc" id="L65">        return stmt;</span>
+    }
+
+    private Statement conectarMySql() throws Exception {
+        //string de conexão
+<span class="nc" id="L70">        String url = &quot;jdbc:mysql://&quot; + local + &quot;:3306/&quot;+ banco;</span>
+<span class="nc" id="L71">        Class.forName(driverMySql).newInstance();</span>
+<span class="nc" id="L72">        conn = (Connection) DriverManager.getConnection(url , usuario, senha);</span>
+<span class="nc" id="L73">        stmt = conn.createStatement();</span>
+<span class="nc" id="L74">        return stmt;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

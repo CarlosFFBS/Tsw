@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FormListarCliente.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SLA&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">sla.clientes.forms</a> &gt; <span class="el_source">FormListarCliente.java</span></div><h1>FormListarCliente.java</h1><pre class="source lang-java linenums">package sla.clientes.forms;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+import sla.clientes.ClientePessoaFisica;
+import sla.clientes.ClientePessoaJuridica;
+import sla.clientes.NegocioCliente;
+
+public class FormListarCliente extends javax.swing.JFrame implements ActionListener {
+
+    MaskFormatter mascaraCPF;
+    MaskFormatter mascaraCNPJ;
+    DefaultTableModel model;
+    ArrayList&lt;ClientePessoaFisica&gt; listaPF;
+    ArrayList&lt;ClientePessoaJuridica&gt; listaPJ;
+
+<span class="nc" id="L21">    public FormListarCliente() {</span>
+<span class="nc" id="L22">        initComponents();</span>
+<span class="nc" id="L23">        setTitle(&quot;ATUALIZAÇÃO DE CLIENTES&quot;);</span>
+<span class="nc" id="L24">        setLocationRelativeTo(null);</span>
+
+<span class="nc" id="L26">        jRadioButtonPessoaFisica.addActionListener(this);</span>
+<span class="nc" id="L27">        jRadioButtonPessoaJuridica.addActionListener(this);</span>
+<span class="nc" id="L28">        jRadioButtonfiltroCPF.addActionListener(this);</span>
+<span class="nc" id="L29">        jRadioButtonfiltroNome.addActionListener(this);</span>
+
+<span class="nc" id="L31">        jButtonFiltro.setVisible(false);</span>
+<span class="nc" id="L32">        jLabelNome.setVisible(false);</span>
+<span class="nc" id="L33">        jTextFieldNomeFiltro.setVisible(false);</span>
+<span class="nc" id="L34">        jLabelCpfCnpjFiltro.setVisible(false);</span>
+<span class="nc" id="L35">        jFormattedTextFieldCpfCnpjFiltro.setVisible(false);</span>
+<span class="nc" id="L36">        model = (DefaultTableModel) jTableListaCliente.getModel();</span>
+<span class="nc" id="L37">        model.setColumnIdentifiers(new Object[]{&quot;COD&quot;, &quot;CPF&quot;, &quot;Nome&quot;, &quot;Endereço&quot;, &quot;Numero&quot;, &quot;Comp&quot;, &quot;Bairro&quot;,</span>
+            &quot;CEP&quot;, &quot;Cidade&quot;, &quot;UF&quot;, &quot;Email&quot;, &quot;Telefone&quot;,});
+<span class="nc" id="L39">        jRadioButtonPessoaFisica.setSelected(true);</span>
+<span class="nc" id="L40">        jRadioButtonAlterarCliente.setSelected(true);</span>
+        try {
+<span class="nc" id="L42">            mascaraCPF = new MaskFormatter(&quot;###.###.###-##&quot;);</span>
+<span class="nc" id="L43">            mascaraCNPJ = new MaskFormatter(&quot;##.###.###/####-##&quot;);</span>
+<span class="nc" id="L44">            this.mascaraCPF.install(jFormattedTextFieldCpfCnpjFiltro);</span>
+<span class="nc" id="L45">            this.listarDadosCliente();</span>
+<span class="nc" id="L46">        } catch (Exception e) {</span>
+<span class="nc" id="L47">            JOptionPane.showMessageDialog(null, e.getMessage());</span>
+<span class="nc" id="L48">        }</span>
+
+<span class="nc" id="L50">    }</span>
+
+    private void listarDadosCliente() {
+        try {
+<span class="nc" id="L54">            NegocioCliente b = new NegocioCliente();</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if (jRadioButtonPessoaFisica.isSelected()) {</span>
+<span class="nc" id="L57">                model.setColumnIdentifiers(new Object[]{&quot;COD&quot;, &quot;CPF&quot;, &quot;Nome&quot;, &quot;Endereço&quot;, &quot;Numero&quot;, &quot;Comp&quot;, &quot;Bairro&quot;,</span>
+                    &quot;CEP&quot;, &quot;Cidade&quot;, &quot;UF&quot;, &quot;Email&quot;, &quot;Telefone&quot;,});
+
+<span class="nc" id="L60">                ClientePessoaFisica pfConsultado = new ClientePessoaFisica();</span>
+<span class="nc" id="L61">                pfConsultado.setCli_Cpf(jFormattedTextFieldCpfCnpjFiltro.getText().trim());</span>
+<span class="nc" id="L62">                pfConsultado.setNome(jTextFieldNomeFiltro.getText());</span>
+<span class="nc" id="L63">                ArrayList&lt;ClientePessoaFisica&gt; listaPF = b.listarClientePF();</span>
+                //Zerando as linhas existentes na tabela atual
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L66">                    model.removeRow(0);</span>
+                }
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                for (ClientePessoaFisica clientePF : listaPF) {</span>
+<span class="nc" id="L69">                    model.addRow(new Object[]{clientePF.getCli_Codigo(), clientePF.getCli_Cpf(), clientePF.getNome(), clientePF.getLogradouro(),</span>
+<span class="nc" id="L70">                        clientePF.getNumeroLogradouro(), clientePF.getComplemento(), clientePF.getBairro(),</span>
+<span class="nc" id="L71">                        clientePF.getCep(), clientePF.getCidade(), clientePF.getEstado(), clientePF.getEmail(), clientePF.getTelefone()}</span>
+                    );
+<span class="nc" id="L73">                }</span>
+<span class="nc" id="L74">                jFormattedTextFieldCpfCnpjFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L75">                jTextFieldNomeFiltro.setText(&quot;&quot;);</span>
+            }
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (jRadioButtonPessoaJuridica.isSelected()) {</span>
+<span class="nc" id="L78">                model.setColumnIdentifiers(new Object[]{&quot;CD_Cliente&quot;, &quot;CNPJ&quot;, &quot;Razão Social&quot;, &quot;Endereço&quot;, &quot;Numero&quot;, &quot;Complemento&quot;, &quot;Bairro&quot;,</span>
+                    &quot;CEP&quot;, &quot;Cidade&quot;, &quot;UF&quot;, &quot;Email&quot;, &quot;Telefone&quot;,});
+<span class="nc" id="L80">                ClientePessoaJuridica pjConsultado = new ClientePessoaJuridica();</span>
+<span class="nc" id="L81">                pjConsultado.setCli_Cnpj(jFormattedTextFieldCpfCnpjFiltro.getText());</span>
+<span class="nc" id="L82">                ArrayList&lt;ClientePessoaJuridica&gt; listaPJ = b.listarClientePJ();</span>
+//Zerando as linhas existentes na tabela atual
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L85">                    model.removeRow(0);</span>
+                }
+<span class="nc bnc" id="L87" title="All 2 branches missed.">                for (ClientePessoaJuridica clientePJ : listaPJ) {</span>
+<span class="nc" id="L88">                    model.addRow(new Object[]{clientePJ.getCli_Codigo(), clientePJ.getCli_Cnpj(), clientePJ.getRazaoSocial(), clientePJ.getLogradouro(),</span>
+<span class="nc" id="L89">                        clientePJ.getNumeroLogradouro(), clientePJ.getComplemento(), clientePJ.getBairro(),</span>
+<span class="nc" id="L90">                        clientePJ.getCep(), clientePJ.getCidade(), clientePJ.getEstado(), clientePJ.getEmail(), clientePJ.getTelefone()}</span>
+                    );
+<span class="nc" id="L92">                    jFormattedTextFieldCpfCnpjFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L93">                }</span>
+            }
+
+<span class="nc" id="L96">        } catch (Exception e) {</span>
+            try {//
+<span class="nc" id="L98">                JOptionPane.showMessageDialog(null, e.getMessage());</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L100">                    model.removeRow(0);</span>
+                }
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                if (jRadioButtonPessoaFisica.isSelected()) {</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">                    for (ClientePessoaFisica clientePF : listaPF) {</span>
+<span class="nc" id="L104">                        model.addRow(new Object[]{clientePF.getCli_Codigo(), clientePF.getCli_Cpf(), clientePF.getNome(), clientePF.getLogradouro(),</span>
+<span class="nc" id="L105">                            clientePF.getNumeroLogradouro(), clientePF.getComplemento(), clientePF.getBairro(),</span>
+<span class="nc" id="L106">                            clientePF.getCep(), clientePF.getCidade(), clientePF.getEstado(), clientePF.getEmail(), clientePF.getTelefone()}</span>
+                        );
+<span class="nc" id="L108">                    }</span>
+<span class="nc" id="L109">                    jFormattedTextFieldCpfCnpjFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L110">                    jTextFieldNomeFiltro.setText(&quot;&quot;);</span>
+                }
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                if (jRadioButtonPessoaJuridica.isSelected()) {</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                    for (ClientePessoaJuridica clientePJ : listaPJ) {</span>
+<span class="nc" id="L114">                        model.addRow(new Object[]{clientePJ.getCli_Codigo(), clientePJ.getCli_Cnpj(), clientePJ.getRazaoSocial(), clientePJ.getLogradouro(),</span>
+<span class="nc" id="L115">                            clientePJ.getNumeroLogradouro(), clientePJ.getComplemento(), clientePJ.getBairro(),</span>
+<span class="nc" id="L116">                            clientePJ.getCep(), clientePJ.getCidade(), clientePJ.getEstado(), clientePJ.getEmail(), clientePJ.getTelefone()}</span>
+                        );
+<span class="nc" id="L118">                        jFormattedTextFieldCpfCnpjFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L119">                    }</span>
+
+                }
+
+<span class="nc" id="L123">            } catch (Exception ez) {</span>
+
+<span class="nc" id="L125">                JOptionPane.showMessageDialog(null, e.getMessage());</span>
+
+<span class="nc" id="L127">            }</span>
+
+<span class="nc" id="L129">        }</span>
+<span class="nc" id="L130">    }</span>
+
+    private void consultarDadosCliente() {
+        try {
+<span class="nc" id="L134">            NegocioCliente a = new NegocioCliente();</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (jRadioButtonPessoaFisica.isSelected()) {</span>
+<span class="nc" id="L136">                ClientePessoaFisica pf = new ClientePessoaFisica();</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">                if (jRadioButtonfiltroCPF.isSelected()) {</span>
+<span class="nc" id="L138">                    pf.setCli_Cpf(jFormattedTextFieldCpfCnpjFiltro.getText());</span>
+                }
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                if (jRadioButtonfiltroNome.isSelected()) {</span>
+<span class="nc" id="L141">                    pf.setNome(jTextFieldNomeFiltro.getText());</span>
+                }
+<span class="nc" id="L143">                listaPF = a.consultarClientePF(pf);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L145">                    model.removeRow(0);</span>
+                }
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                for (ClientePessoaFisica clientePF : listaPF) {</span>
+<span class="nc" id="L148">                    model.addRow(new Object[]{clientePF.getCli_Codigo(), clientePF.getCli_Cpf(), clientePF.getNome(), clientePF.getLogradouro(),</span>
+<span class="nc" id="L149">                        clientePF.getNumeroLogradouro(), clientePF.getComplemento(), clientePF.getBairro(),</span>
+<span class="nc" id="L150">                        clientePF.getCep(), clientePF.getCidade(), clientePF.getEstado(), clientePF.getEmail(), clientePF.getTelefone()}</span>
+                    );
+<span class="nc" id="L152">                }</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">            } else if (jRadioButtonPessoaJuridica.isSelected()) {</span>
+<span class="nc" id="L154">                ClientePessoaJuridica pj = new ClientePessoaJuridica();</span>
+<span class="nc" id="L155">                pj.setCli_Cnpj(jFormattedTextFieldCpfCnpjFiltro.getText());</span>
+
+<span class="nc" id="L157">                ArrayList&lt;ClientePessoaJuridica&gt; listaPJ = a.consultarClientePJ(pj);</span>
+//Zerando as linhas existentes na tabela atual
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L160">                    model.removeRow(0);</span>
+                }
+<span class="nc bnc" id="L162" title="All 2 branches missed.">                for (ClientePessoaJuridica clientePJ : listaPJ) {</span>
+<span class="nc" id="L163">                    model.addRow(new Object[]{clientePJ.getCli_Codigo(), clientePJ.getCli_Cnpj(), clientePJ.getRazaoSocial(), clientePJ.getLogradouro(),</span>
+<span class="nc" id="L164">                        clientePJ.getNumeroLogradouro(), clientePJ.getComplemento(), clientePJ.getBairro(),</span>
+<span class="nc" id="L165">                        clientePJ.getCep(), clientePJ.getCidade(), clientePJ.getEstado(), clientePJ.getEmail(), clientePJ.getTelefone()}</span>
+                    );
+<span class="nc" id="L167">                    jFormattedTextFieldCpfCnpjFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L168">                }</span>
+            }
+<span class="nc" id="L170">        } catch (Exception e) {</span>
+<span class="nc" id="L171">            JOptionPane.showMessageDialog(null, e.getMessage());</span>
+<span class="nc" id="L172">            jFormattedTextFieldCpfCnpjFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L173">            jTextFieldNomeFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L174">        }</span>
+
+<span class="nc" id="L176">    }</span>
+
+    ;
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L184">        buttonGroup1 = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L185">        buttonGroup2 = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L186">        buttonGroup3 = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L187">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L188">        jButtonConfirmar = new javax.swing.JButton();</span>
+<span class="nc" id="L189">        jRadioButtonAlterarCliente = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L190">        jRadioButtonRemoverCliente = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L191">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L192">        jButtonFiltro = new javax.swing.JButton();</span>
+<span class="nc" id="L193">        jTextFieldNomeFiltro = new javax.swing.JTextField();</span>
+<span class="nc" id="L194">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L195">        jTableListaCliente = new javax.swing.JTable();</span>
+<span class="nc" id="L196">        jRadioButtonPessoaFisica = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L197">        jRadioButtonPessoaJuridica = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L198">        jLabelCpfCnpjFiltro = new javax.swing.JLabel();</span>
+<span class="nc" id="L199">        jFormattedTextFieldCpfCnpjFiltro = new javax.swing.JFormattedTextField();</span>
+<span class="nc" id="L200">        jLabelNome = new javax.swing.JLabel();</span>
+<span class="nc" id="L201">        jLabelMensagemTipoFiltro = new javax.swing.JLabel();</span>
+<span class="nc" id="L202">        jRadioButtonfiltroCPF = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L203">        jRadioButtonfiltroNome = new javax.swing.JRadioButton();</span>
+
+<span class="nc" id="L205">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+
+<span class="nc" id="L207">        jLabel1.setText(&quot;ATUALIZAÇÃO DE CLIENTES&quot;);</span>
+
+<span class="nc" id="L209">        jButtonConfirmar.setText(&quot;CONFIRMAR&quot;);</span>
+<span class="nc" id="L210">        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L212">                jButtonConfirmarActionPerformed(evt);</span>
+<span class="nc" id="L213">            }</span>
+        });
+
+<span class="nc" id="L216">        buttonGroup2.add(jRadioButtonAlterarCliente);</span>
+<span class="nc" id="L217">        jRadioButtonAlterarCliente.setText(&quot;ALTERAR CLIENTE&quot;);</span>
+
+<span class="nc" id="L219">        buttonGroup2.add(jRadioButtonRemoverCliente);</span>
+<span class="nc" id="L220">        jRadioButtonRemoverCliente.setText(&quot;REMOVER CLIENTE&quot;);</span>
+
+<span class="nc" id="L222">        jLabel2.setText(&quot;SELECIONE O TIPO DO CLIENTE&quot;);</span>
+
+<span class="nc" id="L224">        jButtonFiltro.setText(&quot;PESQUISAR&quot;);</span>
+<span class="nc" id="L225">        jButtonFiltro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L227">                jButtonFiltroActionPerformed(evt);</span>
+<span class="nc" id="L228">            }</span>
+        });
+
+<span class="nc" id="L231">        jTableListaCliente.setModel(new javax.swing.table.DefaultTableModel(</span>
+            new Object [][] {
+
+            },
+            new String [] {
+                &quot;Title 1&quot;, &quot;Title 2&quot;, &quot;Title 3&quot;, &quot;Title 4&quot;, &quot;Título 5&quot;, &quot;Título 6&quot;, &quot;Título 7&quot;, &quot;Título 8&quot;, &quot;Título 9&quot;, &quot;Título 10&quot;, &quot;Título 11&quot;
+            }
+        ));
+<span class="nc" id="L239">        jScrollPane1.setViewportView(jTableListaCliente);</span>
+
+<span class="nc" id="L241">        buttonGroup1.add(jRadioButtonPessoaFisica);</span>
+<span class="nc" id="L242">        jRadioButtonPessoaFisica.setText(&quot;PESSOA FISICA&quot;);</span>
+
+<span class="nc" id="L244">        buttonGroup1.add(jRadioButtonPessoaJuridica);</span>
+<span class="nc" id="L245">        jRadioButtonPessoaJuridica.setText(&quot;PESSOA JURIDICA&quot;);</span>
+<span class="nc" id="L246">        jRadioButtonPessoaJuridica.setActionCommand(&quot;&quot;);</span>
+
+<span class="nc" id="L248">        jLabelCpfCnpjFiltro.setText(&quot;CPF&quot;);</span>
+
+<span class="nc" id="L250">        jFormattedTextFieldCpfCnpjFiltro.setText(&quot;   &quot;);</span>
+
+<span class="nc" id="L252">        jLabelNome.setText(&quot;NOME&quot;);</span>
+
+<span class="nc" id="L254">        jLabelMensagemTipoFiltro.setText(&quot;SELECIONE O TIPO DE FILTRO&quot;);</span>
+
+<span class="nc" id="L256">        buttonGroup3.add(jRadioButtonfiltroCPF);</span>
+<span class="nc" id="L257">        jRadioButtonfiltroCPF.setText(&quot;CPF&quot;);</span>
+
+<span class="nc" id="L259">        buttonGroup3.add(jRadioButtonfiltroNome);</span>
+<span class="nc" id="L260">        jRadioButtonfiltroNome.setText(&quot;NOME&quot;);</span>
+
+<span class="nc" id="L262">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L263">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L264">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L265">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L266">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L267">                .addGap(27, 27, 27)</span>
+<span class="nc" id="L268">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L269">                    .addComponent(jRadioButtonAlterarCliente)</span>
+<span class="nc" id="L270">                    .addComponent(jRadioButtonRemoverCliente))</span>
+<span class="nc" id="L271">                .addGap(131, 131, 131)</span>
+<span class="nc" id="L272">                .addComponent(jButtonConfirmar))</span>
+<span class="nc" id="L273">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L274">                .addContainerGap()</span>
+<span class="nc" id="L275">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L276">                    .addComponent(jLabelCpfCnpjFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L277">                    .addComponent(jFormattedTextFieldCpfCnpjFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L278">                .addGap(39, 39, 39)</span>
+<span class="nc" id="L279">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L280">                    .addComponent(jTextFieldNomeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L281">                    .addComponent(jLabelNome)))</span>
+<span class="nc" id="L282">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L283">                .addContainerGap()</span>
+<span class="nc" id="L284">                .addComponent(jButtonFiltro))</span>
+<span class="nc" id="L285">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L286">                .addContainerGap()</span>
+<span class="nc" id="L287">                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L288">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L289">                .addContainerGap()</span>
+<span class="nc" id="L290">                .addComponent(jLabel2)</span>
+<span class="nc" id="L291">                .addGap(251, 251, 251)</span>
+<span class="nc" id="L292">                .addComponent(jLabel1))</span>
+<span class="nc" id="L293">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L294">                .addContainerGap()</span>
+<span class="nc" id="L295">                .addComponent(jRadioButtonPessoaFisica))</span>
+<span class="nc" id="L296">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L297">                .addContainerGap()</span>
+<span class="nc" id="L298">                .addComponent(jRadioButtonPessoaJuridica))</span>
+<span class="nc" id="L299">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L300">                .addContainerGap()</span>
+<span class="nc" id="L301">                .addComponent(jRadioButtonfiltroCPF)</span>
+<span class="nc" id="L302">                .addGap(34, 34, 34)</span>
+<span class="nc" id="L303">                .addComponent(jRadioButtonfiltroNome))</span>
+<span class="nc" id="L304">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L305">                .addContainerGap()</span>
+<span class="nc" id="L306">                .addComponent(jLabelMensagemTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+<span class="nc" id="L308">        layout.setVerticalGroup(</span>
+<span class="nc" id="L309">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L310">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L311">                .addGap(16, 16, 16)</span>
+<span class="nc" id="L312">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L313">                    .addComponent(jLabel1)</span>
+<span class="nc" id="L314">                    .addComponent(jLabel2))</span>
+<span class="nc" id="L315">                .addGap(12, 12, 12)</span>
+<span class="nc" id="L316">                .addComponent(jRadioButtonPessoaFisica)</span>
+<span class="nc" id="L317">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L318">                .addComponent(jRadioButtonPessoaJuridica)</span>
+<span class="nc" id="L319">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L320">                .addComponent(jLabelMensagemTipoFiltro)</span>
+<span class="nc" id="L321">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L322">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L323">                    .addComponent(jRadioButtonfiltroCPF)</span>
+<span class="nc" id="L324">                    .addComponent(jRadioButtonfiltroNome))</span>
+<span class="nc" id="L325">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L326">                    .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L327">                        .addGap(8, 8, 8)</span>
+<span class="nc" id="L328">                        .addComponent(jLabelNome))</span>
+<span class="nc" id="L329">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</span>
+<span class="nc" id="L330">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L331">                        .addComponent(jLabelCpfCnpjFiltro)))</span>
+<span class="nc" id="L332">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L333">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L334">                    .addComponent(jFormattedTextFieldCpfCnpjFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L335">                    .addComponent(jTextFieldNomeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L336">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L337">                .addComponent(jButtonFiltro)</span>
+<span class="nc" id="L338">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L339">                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L340">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L341">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L342">                    .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L343">                        .addGap(15, 15, 15)</span>
+<span class="nc" id="L344">                        .addComponent(jRadioButtonAlterarCliente)</span>
+<span class="nc" id="L345">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L346">                        .addComponent(jRadioButtonRemoverCliente))</span>
+<span class="nc" id="L347">                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L348">                .addContainerGap(19, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L351">        pack();</span>
+<span class="nc" id="L352">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+<span class="nc bnc" id="L355" title="All 2 branches missed.">        if (jTableListaCliente.getSelectedRow() &lt; 0) {</span>
+<span class="nc" id="L356">            JOptionPane.showMessageDialog(null, &quot;Por favor selecione uma linha e indique a ação.&quot;);</span>
+<span class="nc" id="L357">            return;</span>
+        }
+        try {
+
+<span class="nc bnc" id="L361" title="All 2 branches missed.">            if (jRadioButtonAlterarCliente.isSelected()) {</span>
+<span class="nc bnc" id="L362" title="All 2 branches missed.">                if (jRadioButtonPessoaFisica.isSelected()) {</span>
+<span class="nc" id="L363">                    FormAlterarCliente EnviaTextoPF = new FormAlterarCliente();</span>
+<span class="nc" id="L364">                    EnviaTextoPF.setVisible(true);</span>
+<span class="nc" id="L365">                    Integer pfSelecionado = (Integer) jTableListaCliente.getValueAt(jTableListaCliente.getSelectedRow(), 0);</span>
+<span class="nc" id="L366">                    EnviaTextoPF.RecebeJtablePF(pfSelecionado);</span>
+                }
+<span class="nc bnc" id="L368" title="All 2 branches missed.">                if (jRadioButtonPessoaJuridica.isSelected()) {</span>
+<span class="nc" id="L369">                    FormAlterarCliente EnviaTextoPJ = new FormAlterarCliente();</span>
+<span class="nc" id="L370">                    EnviaTextoPJ.setVisible(true);</span>
+<span class="nc" id="L371">                    Integer pjSelecionado = (Integer) jTableListaCliente.getValueAt(jTableListaCliente.getSelectedRow(), 0);</span>
+<span class="nc" id="L372">                    EnviaTextoPJ.RecebeJtablePJ(pjSelecionado);</span>
+                }
+
+            }
+<span class="nc bnc" id="L376" title="All 2 branches missed.">            if (jRadioButtonRemoverCliente.isSelected()) {</span>
+<span class="nc bnc" id="L377" title="All 2 branches missed.">                if (jRadioButtonPessoaFisica.isSelected()) {</span>
+<span class="nc" id="L378">                    ClientePessoaFisica b = new ClientePessoaFisica();</span>
+<span class="nc" id="L379">                    NegocioCliente a = new NegocioCliente();</span>
+<span class="nc" id="L380">                    Integer pfSelecionado = (Integer) jTableListaCliente.getValueAt(jTableListaCliente.getSelectedRow(), 0);</span>
+<span class="nc" id="L381">                    b.setCli_Codigo(pfSelecionado);</span>
+<span class="nc" id="L382">                    a.removerClientePFCod(b);</span>
+<span class="nc" id="L383">                    JOptionPane.showMessageDialog(null, &quot; Cliente removido com sucesso..&quot;);</span>
+<span class="nc" id="L384">                    jTextFieldNomeFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L385">                    listaPF = a.listarClientePF();</span>
+<span class="nc bnc" id="L386" title="All 2 branches missed.">                    while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L387">                        model.removeRow(0);</span>
+                    }
+<span class="nc" id="L389">                    this.listarDadosCliente();</span>
+                }
+<span class="nc bnc" id="L391" title="All 2 branches missed.">                if (jRadioButtonPessoaJuridica.isSelected()) {</span>
+<span class="nc" id="L392">                    ClientePessoaJuridica b = new ClientePessoaJuridica();</span>
+<span class="nc" id="L393">                    NegocioCliente a = new NegocioCliente();</span>
+<span class="nc" id="L394">                    Integer pjSelecionado = (Integer) jTableListaCliente.getValueAt(jTableListaCliente.getSelectedRow(), 0);</span>
+<span class="nc" id="L395">                    b.setCli_Codigo(pjSelecionado);</span>
+<span class="nc" id="L396">                    a.removerClientePJCod(b);</span>
+<span class="nc" id="L397">                    JOptionPane.showMessageDialog(null, &quot; Cliente removido com sucesso..&quot;);</span>
+<span class="nc" id="L398">                    jTextFieldNomeFiltro.setText(&quot;&quot;);</span>
+<span class="nc" id="L399">                    listaPJ = a.listarClientePJ();</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                    while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L401">                        model.removeRow(0);</span>
+                    }
+<span class="nc" id="L403">                    listaPJ = a.listarClientePJ();</span>
+<span class="nc" id="L404">                    this.listarDadosCliente();</span>
+
+                }
+
+            }
+
+<span class="nc" id="L410">        } catch (Exception e) {</span>
+<span class="nc" id="L411">            JOptionPane.showMessageDialog(null, e.getMessage());</span>
+
+<span class="nc" id="L413">        }</span>
+
+<span class="nc" id="L415">    }//GEN-LAST:event_jButtonConfirmarActionPerformed</span>
+
+    private void jButtonFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltroActionPerformed
+
+<span class="nc" id="L419">        this.consultarDadosCliente();</span>
+
+
+<span class="nc" id="L422">    }//GEN-LAST:event_jButtonFiltroActionPerformed</span>
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot; Look and feel setting code (optional) &quot;&gt;
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+<span class="nc bnc" id="L431" title="All 2 branches missed.">            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">                if (&quot;Nimbus&quot;.equals(info.getName())) {</span>
+<span class="nc" id="L433">                    javax.swing.UIManager.setLookAndFeel(info.getClassName());</span>
+<span class="nc" id="L434">                    break;</span>
+                }
+            }
+<span class="nc" id="L437">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L438">            java.util.logging.Logger.getLogger(FormListarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L439">        } catch (InstantiationException ex) {</span>
+<span class="nc" id="L440">            java.util.logging.Logger.getLogger(FormListarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L441">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L442">            java.util.logging.Logger.getLogger(FormListarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L443">        } catch (javax.swing.UnsupportedLookAndFeelException ex) {</span>
+<span class="nc" id="L444">            java.util.logging.Logger.getLogger(FormListarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L445">        }</span>
+        //&lt;/editor-fold&gt;
+
+        /* Create and display the form */
+<span class="nc" id="L449">        java.awt.EventQueue.invokeLater(new Runnable() {</span>
+            public void run() {
+<span class="nc" id="L451">                new FormListarCliente().setVisible(true);</span>
+<span class="nc" id="L452">            }</span>
+        });
+<span class="nc" id="L454">    }</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonFiltro;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCpfCnpjFiltro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelCpfCnpjFiltro;
+    private javax.swing.JLabel jLabelMensagemTipoFiltro;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JRadioButton jRadioButtonAlterarCliente;
+    private javax.swing.JRadioButton jRadioButtonPessoaFisica;
+    private javax.swing.JRadioButton jRadioButtonPessoaJuridica;
+    private javax.swing.JRadioButton jRadioButtonRemoverCliente;
+    private javax.swing.JRadioButton jRadioButtonfiltroCPF;
+    private javax.swing.JRadioButton jRadioButtonfiltroNome;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableListaCliente;
+    private javax.swing.JTextField jTextFieldNomeFiltro;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+<span class="nc bnc" id="L482" title="All 2 branches missed.">        if (ae.getSource() == jRadioButtonPessoaFisica) {</span>
+
+            try {
+
+<span class="nc" id="L486">                model.setColumnIdentifiers(new Object[]{&quot;COD&quot;, &quot;CPF&quot;, &quot;Nome&quot;, &quot;Endereço&quot;, &quot;Numero&quot;, &quot;Comp&quot;, &quot;Bairro&quot;,</span>
+                    &quot;CEP&quot;, &quot;Cidade&quot;, &quot;UF&quot;, &quot;Email&quot;, &quot;Telefone&quot;,});
+
+<span class="nc" id="L489">                jLabelMensagemTipoFiltro.setVisible(true);</span>
+<span class="nc" id="L490">                jRadioButtonfiltroCPF.setVisible(true);</span>
+<span class="nc" id="L491">                jRadioButtonfiltroNome.setVisible(true);</span>
+<span class="nc" id="L492">                jButtonFiltro.setVisible(false);</span>
+<span class="nc" id="L493">                jLabelNome.setVisible(false);</span>
+<span class="nc" id="L494">                jTextFieldNomeFiltro.setVisible(false);</span>
+<span class="nc" id="L495">                jLabelCpfCnpjFiltro.setVisible(false);</span>
+<span class="nc" id="L496">                jFormattedTextFieldCpfCnpjFiltro.setVisible(false);</span>
+<span class="nc" id="L497">                jLabelCpfCnpjFiltro.setText(&quot;CPF&quot;);</span>
+<span class="nc bnc" id="L498" title="All 2 branches missed.">                while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L499">                    model.removeRow(0);</span>
+                }
+<span class="nc" id="L501">                this.listarDadosCliente();</span>
+
+<span class="nc" id="L503">            } catch (Exception e) {</span>
+<span class="nc" id="L504">                JOptionPane.showMessageDialog(null, e.getMessage());</span>
+<span class="nc" id="L505">            }</span>
+
+        }
+<span class="nc bnc" id="L508" title="All 2 branches missed.">        if (ae.getSource() == jRadioButtonPessoaJuridica) {</span>
+<span class="nc" id="L509">            model.setColumnIdentifiers(new Object[]{&quot;CD_Cliente&quot;, &quot;CNPJ&quot;, &quot;Razão Social&quot;, &quot;Endereço&quot;, &quot;Numero&quot;, &quot;Complemento&quot;, &quot;Bairro&quot;,</span>
+                &quot;CEP&quot;, &quot;Cidade&quot;, &quot;UF&quot;, &quot;Email&quot;, &quot;Telefone&quot;,});
+<span class="nc" id="L511">            jLabelNome.setVisible(false);</span>
+<span class="nc" id="L512">            jLabelMensagemTipoFiltro.setVisible(false);</span>
+<span class="nc" id="L513">            jRadioButtonfiltroCPF.setVisible(false);</span>
+<span class="nc" id="L514">            jRadioButtonfiltroNome.setVisible(false);</span>
+<span class="nc" id="L515">            jButtonFiltro.setVisible(true);</span>
+<span class="nc" id="L516">            jTextFieldNomeFiltro.setVisible(false);</span>
+<span class="nc" id="L517">            mascaraCPF.uninstall();</span>
+<span class="nc" id="L518">            mascaraCNPJ.install(jFormattedTextFieldCpfCnpjFiltro);</span>
+<span class="nc" id="L519">            jLabelCpfCnpjFiltro.setText(&quot;CNPJ&quot;);</span>
+<span class="nc" id="L520">            jLabelCpfCnpjFiltro.setVisible(true);</span>
+<span class="nc" id="L521">            jFormattedTextFieldCpfCnpjFiltro.setVisible(true);</span>
+
+<span class="nc bnc" id="L523" title="All 2 branches missed.">            while (model.getRowCount() &gt; 0) {</span>
+<span class="nc" id="L524">                model.removeRow(0);</span>
+            }
+<span class="nc" id="L526">            this.listarDadosCliente();</span>
+
+        }
+<span class="nc bnc" id="L529" title="All 2 branches missed.">        if (ae.getSource() == jRadioButtonfiltroCPF) {</span>
+<span class="nc" id="L530">            jButtonFiltro.setVisible(true);</span>
+<span class="nc" id="L531">            jLabelNome.setVisible(false);</span>
+<span class="nc" id="L532">            jTextFieldNomeFiltro.setVisible(false);</span>
+<span class="nc" id="L533">            jLabelCpfCnpjFiltro.setVisible(true);</span>
+<span class="nc" id="L534">            jFormattedTextFieldCpfCnpjFiltro.setVisible(true);</span>
+<span class="nc" id="L535">            mascaraCNPJ.uninstall();</span>
+<span class="nc" id="L536">            mascaraCPF.install(jFormattedTextFieldCpfCnpjFiltro);</span>
+        }
+<span class="nc bnc" id="L538" title="All 2 branches missed.">        if (ae.getSource() == jRadioButtonfiltroNome) {</span>
+<span class="nc" id="L539">            jButtonFiltro.setVisible(true);</span>
+<span class="nc" id="L540">            jLabelNome.setVisible(true);</span>
+<span class="nc" id="L541">            jTextFieldNomeFiltro.setVisible(true);</span>
+<span class="nc" id="L542">            jLabelCpfCnpjFiltro.setVisible(false);</span>
+<span class="nc" id="L543">            jFormattedTextFieldCpfCnpjFiltro.setVisible(false);</span>
+        }
+<span class="nc" id="L545">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
