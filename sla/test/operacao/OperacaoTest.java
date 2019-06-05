@@ -33,7 +33,7 @@ public class OperacaoTest {
     public void formatadorVirgulaPontoPrecoTest() throws Exception {
         String var = "10,0";
         float result = op.formatadorVirgulaParaPonto(var);
-        assertEquals(10.0, result);
+        assertEquals(10.0, result, 0.01);
     }
 
     //testando método passando preço com 2 vírgulas

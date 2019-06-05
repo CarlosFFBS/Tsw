@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import sla.clientes.ClientePessoaFisica;
 import sla.clientes.ClientePessoaJuridica;
 import sla.clientes.NegocioCliente;
@@ -24,8 +25,6 @@ public class ClienteUnitTest {
     public void setUp() {
         //Instanciando objeto a ser utilizado nos testes.. 
         negocio = new NegocioCliente();
-        pf = new ClientePessoaFisica();
-        pj = new ClientePessoaJuridica();
 
     }
 
@@ -3037,6 +3036,5 @@ public class ClienteUnitTest {
     }
 
     //Fim dos testes unitários do módulo update
-
   
 }

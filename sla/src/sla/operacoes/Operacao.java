@@ -7,6 +7,7 @@ package sla.operacoes;
 
 public class Operacao {
 
+    //Metodo recebe um preço válido com virgula e converte para ponto
     public float formatadorVirgulaParaPonto(String preco) throws Exception {
         String precoConvertido = "";
         int tamanhoString = preco.length();
@@ -21,18 +22,21 @@ public class Operacao {
 
     }
 
+    //Metodo deve ser testado
     public java.sql.Date dataJavaSql(java.util.Date a) {
         java.sql.Date dataSQL = new java.sql.Date(a.getTime());
         return dataSQL;
 
     }
 
+    //Metodo deve ser testado
     public java.util.Date dataSqlJava(java.sql.Date a) {
         java.util.Date dataJAVA = new java.util.Date(a.getTime());
         return dataJAVA;
 
     }
 
+    /*
     public String formataCPF(String cpf) throws Exception {
 
         try {
@@ -52,7 +56,8 @@ public class Operacao {
         }
 
     }
-
+     */
+ /*
     public boolean validaCPF(String cpf) {
         boolean validaCPF = true;
         for (int i = 0; i < cpf.length(); i++) {
@@ -70,6 +75,9 @@ public class Operacao {
         return validaCPF;
 
     }
+
+     */
+ /*
         public boolean validaCNPJ(String cnpj) {
         boolean validaCNPJ = true;
         for (int i = 0; i < cnpj.length(); i++) {
@@ -87,25 +95,26 @@ public class Operacao {
         return validaCNPJ;
 
     }
+     */
 
+    //Método recebe 8 caracteres e formata para formato do CEP XX.XXX-XXX
     public String formataCEP(String cep) throws Exception {
 
-        try {
-
-            String limparCEP = cep.trim();
-            String cepFormatado;
+        String limparCEP = cep.trim();
+        String cepFormatado;
+        if (cep.length() == 8) {
             // Loop para validar dígitos do CPF 
             cepFormatado = limparCEP.substring(0, 2) + ".";
             cepFormatado += limparCEP.substring(2, 5) + "-";
             cepFormatado += limparCEP.substring(5, 8);
 
             return cepFormatado;
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new Exception("Preencha todos os números do CEP");
+        } else {
+            throw new RuntimeException("o CEP deve conter 8 caracteres");
         }
 
     }
-
+    /*
     public String formataCNPJ(String cnpj) throws Exception {
 
         try {
@@ -131,6 +140,9 @@ public class Operacao {
 
     }
 
+     */
+
+ /*
     public String formataTelefone(String telefone) throws Exception {
 
         try {
@@ -155,4 +167,5 @@ public class Operacao {
 
     }
 
+     */
 }
